@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Release</title>
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/android-chrome-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="msapplication-TileColor" content="#000000">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+    <meta name="theme-color" content="#222222">
+    <meta name="apple-mobile-web-app-status-bar-style" content="translucent black">
+    <meta name="viewport" 
+  content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    
+    <script src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
+
+    <link rel="import" href="bower_components/iron-flex-layout/iron-flex-layout.html">
+    <link rel="import" href="elements/release-app.html">
+    <style>
+      @font-face{
+        font-family:'input';
+        src:url("http://releasefinance.github.io/assets/fonts/is.eot");
+        font-weight: normal;}
+      @font-face{
+        font-family:'input';
+        src:url("http://releasefinance.github.io/assets/fonts/is.woff") format("woff"),url("http://releasefinance.github.io/assets/fonts/is.svg#InputSans-Regular") format("svg");
+        font-weight: normal;}
+      @font-face{
+        font-family:'input';
+        src:url("http://releasefinance.github.io/assets/fonts/InputSans-Light.eot");
+        font-weight: light;
+      }
+      @font-face{
+        font-family:'input';
+        src:url("http://releasefinance.github.io/assets/fonts/InputSans-Light.woff") format("woff"),url("http://releasefinance.github.io/assets/fonts/InputSans-Light.svg#InputSans-Light") format("svg");
+        font-weight: normal;
+      }
+      @font-face{
+        font-family:'input';
+        src:url("http://releasefinance.github.io/assets/fonts/InputSans-Bold.eot");
+        font-weight: bold;
+      }
+      @font-face{
+        font-family:'input';
+        src:url("http://releasefinance.github.io/assets/fonts/InputSans-Bold.woff") format("woff"),url("http://releasefinance.github.io/assets/fonts/InputSans-Bold.svg#InputSans-Bold") format("svg");
+        font-weight: bold;
+      }
+      @font-face{
+        font-family:'input';
+        src:url("http://releasefinance.github.io/assets/fonts/InputSans-Thin.eot");
+        font-weight: lighter;
+      }
+      @font-face{
+        font-family:'InputSans-Thin';
+        src:url("http://releasefinance.github.io/assets/fonts/InputSans-Thin.woff") format("woff"),url("http://releasefinance.github.io/assets/fonts/InputSans-Thin.svg#InputSans-Thin") format("svg");
+        font-weight: lighter;
+      }
+      body{
+        font-family:"input", sans-serif;
+      }
+      html, body {
+        min-height: 100vh;
+      }
+      release-app {
+        height: 100%;
+      }
+      h1#logo {
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: #222;
+        font-size: 11px;
+        position: absolute;
+        top: 0px;
+        width: 100%;
+        left: 0px;
+        text-align: center;
+        z-index: 9000;
+      }
+    </style>
+
+    <script type="text/javascript">
+      !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","group","track","ready","alias","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t){var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)};analytics.SNIPPET_VERSION="3.0.1";
+      analytics.load("4JbooGOLcsWboy6prST7zmVEMZJRG1pZ");
+      analytics.page()
+      }}();
+      </script>
+  </head>
+  <body class="layout vertical">
+    <h1 id="logo">Release</h1>
+    <release-app class="flex layout vertical"></release-app>
+  </body>
+</html>

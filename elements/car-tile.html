@@ -1,0 +1,358 @@
+<link rel="import" href="../bower_components/iron-a11y-keys/iron-a11y-keys.html">
+
+<polymer-element name="car-tile" >
+  <template>
+    <style shim-shadowdom>
+
+
+      neon-animated-pages {
+        height: 100%;
+      }
+
+      #showing {
+        z-index: 5000;
+        background-color: #fff;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        position: fixed;
+        overflow: scroll;
+      }
+
+      .showing-inner {
+        min-height: 100vh;
+        width: 100%;
+      }
+
+      #quote {
+        z-index: 5000;
+        background-color: #fff;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        position: fixed;
+      }
+      #showing h1, #showing h3 {
+        color: #222;
+      }
+
+      #listing h2, #listing h3 {
+        color: white;
+      }
+
+      #listing h3 {
+        text-transform: uppercase;
+        font-size: 10px;
+      }
+
+      #card {
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+      }
+
+      .close {
+        position: fixed;
+        top: 10px;
+        left: 20px;
+        font-size: 32px;
+        color: white;
+        cursor: pointer;
+        padding: 10px;
+      }
+
+      .big-image {
+        min-height: 50vh;
+        width: 100%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+      }
+
+      .quote-form {
+        padding-left: 1em;
+        padding-right: 1em;
+        min-width: 20em;
+        text-align: left;
+        margin: auto;
+      }
+
+      .quote-form .close {
+        color: #222;
+      }
+
+      .quote-form paper-fab {
+        margin-top: 2em;
+      }
+
+      #thanks {
+        background-color: #22dd66;
+        text-align: center;
+      }
+
+      #thanks h3 {
+        color: white;
+        text-align: center;
+      }
+
+      .thanks-message {
+        width: 100%;
+        margin: auto;
+      }
+
+      paper-button {
+        background-color: white;
+        padding: 1em;
+      }
+
+      #listing {
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        position: absolute;
+        z-index: 2;
+      }
+
+      .overlay {
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        background-color: rgba(64,64,64,0.5);
+        position: absolute;
+        z-index: 1;
+        -webkit-transition:background-color 0.5s ease-in; 
+        -moz-transition:background-color 0.5s ease-in; 
+        -o-transition:background-color 0.5s ease-in; 
+        transition:background-color 0.5s ease-in;
+      }
+
+      #card:hover .overlay {
+        background-color: rgba(255,255,255,0.5);
+      }
+
+      .deal {
+        line-height: 150%;
+      }
+
+      .deal .was{
+        opacity: 0.4;
+        color: white;
+        background-color: rgba(40,40,40,0.9);
+        font-weight: light;
+        text-decoration: line-through;
+      }
+
+      .deal .now {
+        color: white;
+        background-color: rgba(40,40,40,0.9);
+        font-weight: bold;
+      }
+
+      .ts-and-cs {
+        max-width: 36em;
+        margin: auto;
+        padding-left: 1em;
+        padding-right: 1em;
+        text-align: left;
+      }
+
+      .quote-button paper-button {
+        position: relative;
+        top: 50px;
+      }
+
+      .info {
+        padding-top: 2em;
+        padding-bottom: 8em;
+      }
+
+    </style>
+
+    <iron-a11y-keys
+          id="keys"
+          keys="esc"
+          target="[[target]]"
+          on-keys-pressed="_escPressed">
+        </iron-a11y-keys>
+
+    <neon-animated-pages selected="{{page}}" class="flex layout horizontal self-center" transition="cross-fade" entry-animation="fade-in-animation" exit-animation="fade-out-animation">
+
+      <div id="card" class="layout horizontal flex" on-tap="show" style$="{{background(img)}}">
+        <div id="listing" class="layout vertical flex">
+          <div class="flex layout horizontal">
+            <div class="flex centered self-center">
+              <h3>{{make}}</h3>
+              <h2>{{model}}</h2>
+              <h3>{{meta}}</h3>
+            </div>
+          </div>
+          <div class="deal layout horizontal">
+            <div class="flex was">
+              £<span>{{price}}</span>
+            </div>
+            <div class="flex now">
+              £<span>{{discounted_price}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="overlay"></div>
+      </div>
+      <div id="showing">
+        <div class="showing-inner layout vertical flex">
+          <div class="big-image layout vertical" style$="{{background(img)}}">
+            <div class="close" on-tap="hide">&times;</div>
+            <div class="self-center flex flex-5">
+            </div>
+            <div class="quote-button self-center flex-1 flex">
+              <paper-button raised on-tap="quote">Request a quote</paper-button>
+            </div>
+          </div>
+          <div class="info centered self-center flex layout horizontal">
+            <div class="self-center flex">
+              <h1><span>{{make}}</span> <span>{{model}}</span></h1>
+              <h3>{{meta}}</h3>
+              <h2>£<span>{{price}}</span><br>reduced to £<span>{{discounted_price}}</span><br>based on <span>{{shares}}</span> shares per month</h2>
+
+              <paper-slider id="sharesSlider" class="red" value="{{shares}}" min="0" max="20" editable></paper-slider>
+
+              <div class="ts-and-cs">
+                <p>3 months deposit and 36 monthly payments.</p>
+                <p>Lending your vehicle to a friend or relative requires either party to use our mobile app which covers the borrower with fully comprehensive insurance and automatically reduces your monthly direct debit.</p>
+                <p>You are liable for the full monthly amount should you not lend your car within a calendar month. We use a third party credit check to ensure affordability.</p>
+              </div>
+            </div>
+          </div>
+          <div class="centered self-center flex layout horizontal">
+            <div class="self-center flex">
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="quote" class="layout horizontal flex">
+        <div class="quote-form centered self-center">
+          <div class="close" on-tap="hide">&times;</div>
+          <h1>Request a quote</h1>
+          <paper-input value="{{email}}" label="Your email"></paper-input>
+          <paper-input value="{{first_name}}" label="First name"></paper-input>
+          <paper-input value="{{last_name}}" label="Last name"></paper-input>
+          <paper-input value="{{postcode}}" label="Post code"></paper-input>
+          <paper-fab raised on-tap="submit" icon="arrow-forward" ></paper-fab>
+        </div>
+      </div>
+      <div id="thanks" class="layout horizontal flex">
+        <div class="thanks-message centered self-center">
+          <h3>Thanks!<br />We’ll be in touch</h3>
+        </div>
+      </div>
+    </neon-animated-pages>
+      
+  </template>
+  <script>
+    Polymer({
+      is: "car-tile",
+      behaviors: [
+        Polymer.IronA11yKeysBehavior
+      ],
+
+      keyBindings: {
+        'esc': '_updatePressed'
+      },
+
+      properties: {
+        page: {
+          type: Number,
+          value: 0
+        },
+        discounted_price: {
+          type: Number,
+          computed: 'discounted(price,shares)'
+        },
+        meta: String,
+        make: String,
+        model: String,
+        monthly: Number,
+        discount: Number,
+        engine: Number,
+        doors: Number,
+        description: String,
+        img: String,
+        first_name: {
+          type: String,
+          value: "",
+          notify: true
+        },
+        last_name: {
+          type: String,
+          value: "",
+          notify: true
+        },
+        email: {
+          type: String,
+          value: "",
+          notify: true
+        },
+        postcode: {
+          type: String,
+          notify: true
+        },
+        shares: {
+          type: Number,
+          value: 0,
+          notify: true
+        },
+        target: {
+          type: Object,
+          value: function() {
+            return document.body;
+          }
+        }
+      },
+      background: function(img) {
+        return("background-image: url('" + img + "');");
+      },
+      show: function() {
+        console.log("show");
+        analytics.track('show', {make: this.make, model: this.model, meta: this.meta, price: this.price, discounted_price: this.discounted_price});
+        this.page = 1;
+      },
+      hide: function() {
+        analytics.track('hide');
+        this.page = 0;
+      },
+      quote: function() {
+        if(this.email == null || this.email == "") {
+          analytics.track('quote form');
+          this.page = 2;
+        } else {
+          analytics.track('quote', {make: this.make, model: this.model, meta: this.meta,price: this.price, discounted_price: this.discounted_price});
+          this.page = 3;
+          var ctx = this;
+          setTimeout(function() {
+            ctx.hide();
+          },2000);
+        }
+      },
+      submit: function() {
+        analytics.identify({email: this.email, first_name: this.first_name, last_name: this.last_name, postcode: this.postcode});
+        analytics.track('quote', {make: this.make, model: this.model, meta: this.meta,price: this.price, discounted_price: this.discounted_price});
+        this.page = 3;
+        var ctx = this;
+        setTimeout(function() {
+          ctx.hide();
+        },2000);
+      },
+      _escPressed: function(event) {
+        analytics.track('hide');
+        this.page = 0;
+      },
+      discounted: function(price, shares) {
+        return(Math.floor((30 - shares) * (price / 30.0 )));
+      }
+    });
+  </script>
+</polymer-element>

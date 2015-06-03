@@ -1,0 +1,208 @@
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/neon-animation/neon-animated-pages.html">
+<link rel="import" href="../bower_components/neon-animation/animations/fade-in-animation.html">
+<link rel="import" href="../bower_components/neon-animation/animations/fade-out-animation.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-input/paper-input-container.html">
+<link rel="import" href="../bower_components/paper-fab/paper-fab.html">
+
+
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="./budget-page.html">
+<link rel="import" href="./shares-page.html">
+<link rel="import" href="./main-page.html">
+
+<polymer-element name="release-app" >
+  <template>
+    <style shim-shadowdom>
+      * {
+        font-family: input, sans-serif;
+      }
+      :root {
+        padding: 10px;
+      }
+
+    </style>
+
+    <neon-animated-pages selected="{{page}}" class="flex layout vertical" transition="cross-fade" entry-animation="fade-in-animation" exit-animation="fade-out-animation">
+
+      <budget-page budget="{{budget}}" on-forward="forward" class="center-justified flex layout vertical"></budget-page>
+
+      <shares-page shares="{{shares}}" on-forward="forward" class="center-justified flex layout vertical"></shares-page>
+
+      <main-page shares="{{shares}}" budget="{{budget}}" on-forward="forward" cars="{{cars}}" first_name="{{first_name}}" last_name="{{last_name}}" email="{{email}}" class="center center-justified flex layout vertical"></main-page>
+
+    </neon-animated-pages>
+  </template>
+  <script>
+    Polymer({
+      is: "release-app",
+
+      properties: {
+        page: {
+          type: Number,
+          value: 0
+        },
+        first_name: String,
+        last_name: String,
+        email: String,
+        postcode: String,
+        budget: Number,
+        shares: Number,
+        car: Object,
+        
+        cars: {
+          type: Object,
+          value: [
+          {
+            make: 'Land Rover',
+            model: 'Ranger Rover Evoque',
+            meta: '2WD 3D 2.8L',
+            price: 200,
+            img: 'http://images.thecarconnection.com/hug/2014-land-rover-range-rover-evoque-european-spec_100437315_h.jpg'
+          },
+          {
+            make: 'Land Rover',
+            model: 'Defender',
+            meta: '4WD 5D 3.8L',
+            price: 250,
+            img: 'http://www.landrover.com/Images/L538_16_EXT_STU05_PURE_COUPE_670x385_281-159299_450x259.jpg'
+          },
+          {
+            make: 'Land Rover',
+            model: 'Freelander 2',
+            meta: '2WD 5D 2.8L',
+            price: 320,
+            img: 'http://www.landrover.com/Images/L538_16_EXT_STU05_PURE_COUPE_670x385_281-159299_450x259.jpg'
+          },
+          {
+            make: 'Land Rover',
+            model: 'Range Rover',
+            meta: '2WD 5D 2.8L',
+            price: 400,
+            img: 'http://www.landrover.com/Images/L538_16_EXT_STU05_PURE_COUPE_670x385_281-159299_450x259.jpg'
+          },
+          {
+            make: 'Land Rover',
+            model: 'Range Rover Sport',
+            meta: '2WD 5D 2.8L',
+            price: 440,
+            img: 'http://www.landrover.com/Images/L538_16_EXT_STU05_PURE_COUPE_670x385_281-159299_450x259.jpg'
+          },
+          {
+            make: 'Land Rover',
+            model: 'Discovery Sport',
+            meta: '2WD 5D 2.8L',
+            price: 460,
+            img: 'http://www.landrover.com/Images/L538_16_EXT_STU05_PURE_COUPE_670x385_281-159299_450x259.jpg'
+          },
+          {
+            make: 'Land Rover',
+            model: 'Evoque 7',
+            meta: '2WD 5D 2.8L',
+            price: 500,
+            img: 'http://www.landrover.com/Images/L538_16_EXT_STU05_PURE_COUPE_670x385_281-159299_450x259.jpg'
+          },
+          {
+            make: 'Land Rover',
+            model: 'Range Rover Sport',
+            meta: '4x4 V6',
+            price: 600,
+            img: 'http://cdn.boldride.com/land-rover/2014/thumb/land-rover-range-rover-sport.654x436.Mar-27-2013_20.03.21.745872.jpg'
+          },
+          {
+            make: 'Land Rover',
+            model: 'Evoque 9',
+            meta: '2WD 5D 2.8L',
+            price: 650,
+            img: 'http://www.landrover.com/Images/L538_16_EXT_STU05_PURE_COUPE_670x385_281-159299_450x259.jpg'
+          },
+          {
+            make: 'Land Rover',
+            model: 'Ranger Rover Evoque',
+            meta: '2WD 3D 2.8L',
+            price: 200,
+            img: 'http://images.thecarconnection.com/hug/2014-land-rover-range-rover-evoque-european-spec_100437315_h.jpg'
+          },
+          {
+            make: 'Land Rover',
+            model: 'Defender',
+            meta: '4WD 5D 3.8L',
+            price: 250,
+            img: 'http://www.landrover.com/Images/L538_16_EXT_STU05_PURE_COUPE_670x385_281-159299_450x259.jpg'
+          },
+          {
+            make: 'Land Rover',
+            model: 'Freelander 2',
+            meta: '2WD 5D 2.8L',
+            price: 320,
+            img: 'http://www.landrover.com/Images/L538_16_EXT_STU05_PURE_COUPE_670x385_281-159299_450x259.jpg'
+          },
+          {
+            make: 'Land Rover',
+            model: 'Range Rover',
+            meta: '2WD 5D 2.8L',
+            price: 400,
+            img: 'http://www.landrover.com/Images/L538_16_EXT_STU05_PURE_COUPE_670x385_281-159299_450x259.jpg'
+          },
+          {
+            make: 'Land Rover',
+            model: 'Range Rover Sport',
+            meta: '2WD 5D 2.8L',
+            price: 440,
+            img: 'http://www.landrover.com/Images/L538_16_EXT_STU05_PURE_COUPE_670x385_281-159299_450x259.jpg'
+          },
+          {
+            make: 'Land Rover',
+            model: 'Discovery Sport',
+            meta: '2WD 5D 2.8L',
+            price: 460,
+            img: 'http://www.landrover.com/Images/L538_16_EXT_STU05_PURE_COUPE_670x385_281-159299_450x259.jpg'
+          },
+          {
+            make: 'Land Rover',
+            model: 'Evoque 7',
+            meta: '2WD 5D 2.8L',
+            price: 500,
+            img: 'http://www.landrover.com/Images/L538_16_EXT_STU05_PURE_COUPE_670x385_281-159299_450x259.jpg'
+          },
+          {
+            make: 'Land Rover',
+            model: 'Range Rover Sport',
+            meta: '4x4 V6',
+            price: 600,
+            img: 'http://cdn.boldride.com/land-rover/2014/thumb/land-rover-range-rover-sport.654x436.Mar-27-2013_20.03.21.745872.jpg'
+          },
+          {
+            make: 'Land Rover',
+            model: 'Evoque 9',
+            meta: '2WD 5D 2.8L',
+            price: 650,
+            img: 'http://www.landrover.com/Images/L538_16_EXT_STU05_PURE_COUPE_670x385_281-159299_450x259.jpg'
+          }
+
+
+          ]
+        }
+      },
+      
+      forward: function() {
+        if(this.page == 5) {
+          this.page = 0;
+        } else {
+          this.page = this.page + 1;
+        }
+        analytics.track('Page ' + this.page);
+      },
+      ready: function() {
+        analytics.track('View');
+        window.app = this;
+        this.budget = 400;
+        this.shares = 2;
+      }
+
+    });
+  </script>
+</polymer-element>

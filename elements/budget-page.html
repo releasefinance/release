@@ -1,0 +1,52 @@
+<link rel="import" href="./release-animated-page.html">
+<link rel="import" href="../bower_components/paper-slider/paper-slider.html">
+<link rel="import" href="../bower_components/paper-fab/paper-fab.html">
+<polymer-element name="budget-page" extends="release-animated-page">
+  <template>
+    <style>
+      
+    </style>
+
+      <div class="flex layout horizontal self-center">
+        <div class="self-center centered">
+          <h3>What is your monthly budget?</h3>
+
+          <paper-slider id="valueSlider" class="red" on-immediate-value-change="valueChange" snaps="true" step="50" value="{{budget}}" min="200" max="2000"></paper-slider>
+
+          <h1>{{displayPrice(immediateBudget)}}</h1>
+       
+          <paper-fab icon="arrow-forward" on-click="forward"></paper-fab>
+        </div>
+      </div>
+  </template>
+  <script>
+    Polymer({
+      is: "budget-page",
+      properties: {
+        budget: {
+          type: Number,
+          notify: true
+        },
+        immediateBudget: Number,
+      },
+      ready: function() {
+        this.immediateBudget = this.budget;
+      },
+      forward: function() {
+        //analytics.track('Chose Days', { days: this.order.days });
+        this.fire('forward');
+      },
+      valueChange: function() {
+        this.immediateBudget = this.$.valueSlider.immediateValue;
+      },
+      displayPrice: function(budget) {
+        if(budget) {
+          return('£' + (parseInt(budget)));
+        } else {
+          return('£0');
+        }
+      }
+    });
+
+  </script>
+</polymer-element>

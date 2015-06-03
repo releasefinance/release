@@ -1,0 +1,128 @@
+<link rel="import" href="./release-animated-page.html">
+<link rel="import" href="./car-tile.html">
+<link rel="import" href="../bower_components/paper-slider/paper-slider.html">
+<link rel="import" href="../bower_components/paper-fab/paper-fab.html">
+<polymer-element name="main-page" extends="release-animated-page">
+  <template>
+    <style>
+      #cars {
+        flex-wrap: flex;
+        text-align: center;
+        margin-bottom: 80px;
+        margin-top: 6px;
+      }
+
+      #sticky-footer {
+        position: fixed;
+        bottom: 0px;
+        left: 0px;
+        width: 100%;
+        background-color: white;
+        z-index: 2000;
+        padding-bottom: 1.5em;
+        padding-top: 0.5em;
+        border-top: 1px solid #222;
+      }
+
+      car-tile {
+        height: 240px;
+        width: 240px;
+        min-width: 200px;
+        margin: 1px;
+        background-color: #eee;
+        display: inline-block;
+        cursor: pointer;
+      }
+
+      .centered {
+        text-align: center;
+      }
+      .car-shim {
+        margin-bottom: 10em;
+      }
+    </style>
+    <div id="cars" class="self-center">
+      <div class="centered self-center">
+        <template id="carList" is="dom-repeat" items="{{cars}}" filter="inRange" observes="budget">
+          <car-tile make="{{item.make}}" model="{{item.model}}" img="{{item.img}}" price="{{item.price}}" meta="{{item.meta}}" first_name="{{first_name}}" last_name="{{last_name}}" email="{{email}}" postcode="{{postcode}}" shares="{{shares}}"></car-tile>
+        </template>
+        <div class="car-shim">&nbsp;</div>
+      </div>
+    </div>
+    <div id="sticky-footer" class="layout horizontal">
+      <div class="flex self-centered centered">
+        <strong>Budget</strong>
+
+        <paper-slider id="budgetSlider" class="red" value="{{budget}}" min="200" max="2000" editable></paper-slider>
+
+      </div>
+      <div class="flex self-centered centered">
+        <strong>Shares</strong>
+
+        <paper-slider id="sharesSlider" class="red" value="{{shares}}" min="0" max="20" editable></paper-slider>
+      </div>
+    </div>
+
+  </template>
+  <script>
+    Polymer({
+      is: "main-page",
+      properties: {
+        budget: {
+          type: Number,
+          //notify: true,
+          observer: 'budgetUpdated'
+        },
+        shares: {
+          type: Number,
+          //notify: true,
+          value: 2,
+          observer: 'sharesUpdated'
+        },
+        cars: Object,
+        email: {
+          type: String,
+          notify: true
+        },
+        first_name: {
+          type: String,
+          notify: true
+        },
+        last_name: {
+          type: String,
+          notify: true
+        },
+        postcode: {
+          type: String,
+          notify: true
+        }
+      },
+      
+      budgetUpdated: function() {
+        this.$.carList.render();
+        analytics.track('budget', {budget: this.budget});
+      },
+      
+      sharesUpdated: function() {
+        analytics.track('shares', {shares: this.shares});
+      },
+
+      displayPrice: function(budget) {
+        if(budget) {
+          return('£' + (parseInt(budget)));
+        } else {
+          return('£0');
+        }
+      },
+
+      ready: function() {
+        window.main = this;
+      },
+
+      inRange: function(item) {
+        return((item.price < (this.budget + 100)) && (item.price > (this.budget - 100)));
+      }
+    });
+
+  </script>
+</polymer-element>

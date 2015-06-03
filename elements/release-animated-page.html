@@ -1,0 +1,28 @@
+<link rel="../bower_components/neon-animation/neon-animated-pages.html">
+
+<link rel="../bower_components/neon-animation/neon-animations.html">
+<polymer-element name="release-animated-page">
+  <template>
+  </template>
+  <script>
+    Polymer({
+      is: 'release-animated-page',
+
+      behaviors: [
+        Polymer.NeonAnimatableBehavior,
+        Polymer.NeonAnimationRunnerBehavior
+      ],
+      properties: {
+        // entryAnimation: {
+        //   value: 'fade-in-animation'
+        // },
+        // exitAnimation: {
+        //   value: 'fade-out-animation'
+        // }
+      },
+      forward: function() {
+        this.fire('forward');
+      }
+    });
+  </script>
+</polymer-element>
