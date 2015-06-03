@@ -40,6 +40,14 @@
       .car-shim {
         margin-bottom: 10em;
       }
+
+      #budgetSlider paper-input {
+        display: none;
+      }
+
+      #sharesSlider paper-input {
+        display: none;
+      }
     </style>
     <div id="cars" class="self-center">
       <div class="centered self-center">
@@ -51,13 +59,13 @@
     </div>
     <div id="sticky-footer" class="layout horizontal">
       <div class="flex self-centered centered">
-        <strong>Budget</strong>
+        <h4>£<span>{{budget}}</span></h4>
 
-        <paper-slider id="budgetSlider" class="red" value="{{budget}}" min="200" max="2000" editable></paper-slider>
+        <paper-slider id="budgetSlider" class="red" value="{{budget}}" min="200" max="2000" step="50" editable></paper-slider>
 
       </div>
       <div class="flex self-centered centered">
-        <strong>Shares</strong>
+        <h4><span>{{shares}}</span> shares</h4>
 
         <paper-slider id="sharesSlider" class="red" value="{{shares}}" min="0" max="20" editable></paper-slider>
       </div>

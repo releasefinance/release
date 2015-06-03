@@ -158,6 +158,9 @@
         padding-left: 1em;
         padding-right: 1em;
         text-align: left;
+        border-top: 1px solid #222;
+        padding-top: 2em;
+        margin-top: 2em;
       }
 
       .quote-button paper-button {
@@ -165,9 +168,21 @@
         top: 50px;
       }
 
+      paper-button.request-quote {
+        background-color: #222;
+        color: white;
+        margin-top: 2em;
+      }
+
       .info {
         padding-top: 2em;
         padding-bottom: 8em;
+      }
+
+      h2.was {
+        text-decoration: line-through;
+        color: #aaa;
+        font-weight: light;
       }
 
     </style>
@@ -208,16 +223,21 @@
             <div class="self-center flex flex-5">
             </div>
             <div class="quote-button self-center flex-1 flex">
-              <paper-button raised on-tap="quote">Request a quote</paper-button>
+              <!--<paper-button raised on-tap="quote">Request a quote</paper-button>-->
             </div>
           </div>
           <div class="info centered self-center flex layout horizontal">
             <div class="self-center flex">
               <h1><span>{{make}}</span> <span>{{model}}</span></h1>
               <h3>{{meta}}</h3>
-              <h2>£<span>{{price}}</span><br>reduced to £<span>{{discounted_price}}</span><br>based on <span>{{shares}}</span> shares per month</h2>
+              <h2 class="was">£<span>{{price}}</span></h2>
+              <h2>You pay £<span class="now">{{discounted_price}}</span></h2>
+              <p>Based on lending the car</p>
+              <h2><span>{{shares}}</span>&times; per month</h2>
 
               <paper-slider id="sharesSlider" class="red" value="{{shares}}" min="0" max="20" editable></paper-slider>
+
+              <paper-button raised on-tap="quote" class="request-quote">Request a quote</paper-button>
 
               <div class="ts-and-cs">
                 <p>3 months deposit and 36 monthly payments.</p>
