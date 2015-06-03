@@ -349,16 +349,14 @@
           analytics.track('quote form');
           this.page = 2;
         } else {
-          analytics.track('quote', {make: this.make, model: this.model, meta: this.meta,price: this.price, discounted_price: this.discounted_price});
-          this.page = 3;
-          var ctx = this;
-          setTimeout(function() {
-            ctx.hide();
-          },2000);
+          this.trackQuote();
         }
       },
       submit: function() {
         analytics.identify({email: this.email, first_name: this.first_name, last_name: this.last_name, postcode: this.postcode});
+        this.trackQuote();
+      },
+      trackQuote: function() {
         analytics.track('quote', {make: this.make, model: this.model, meta: this.meta,price: this.price, discounted_price: this.discounted_price});
         this.page = 3;
         var ctx = this;
