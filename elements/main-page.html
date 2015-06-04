@@ -9,7 +9,7 @@
         flex-wrap: flex;
         text-align: center;
         margin-bottom: 80px;
-        margin-top: 6px;
+        margin-top: 60px;
       }
 
       #sticky-footer {
@@ -17,21 +17,24 @@
         bottom: 0px;
         left: 0px;
         width: 100%;
-        background-color: white;
+        background-color: #555;
         z-index: 2000;
-        padding-bottom: 1.5em;
-        padding-top: 0.5em;
+        padding-bottom: 1em;
+        padding-top: 1em;
         border-top: 1px solid #222;
       }
 
       car-tile {
-        height: 240px;
-        width: 240px;
+        height: 360px;
+        width: 300px;
         min-width: 200px;
         margin: 1px;
-        background-color: #eee;
         display: inline-block;
         cursor: pointer;
+      }
+
+      .deal {
+        padding-bottom: 1em;
       }
 
       .centered {
@@ -48,25 +51,55 @@
       #sharesSlider paper-input {
         display: none;
       }
+
+      .number-display {
+        font-weight: bold;
+        color: #222;
+        background-color: white;
+        padding-left: 1em;
+        padding-right: 1em;
+        padding-top: 0.5em;
+        padding-bottom: 0.5em;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 8px;
+        width: auto;
+        margin: auto;
+        display: inline-block;
+      }
+
+      #sticky-footer paper-slider #sliderKnobInner.paper-slider {
+        background-color: #FFB943;
+      }
+
+      #sticky-footer paper-slider.paper-slider-0:not([disabled]) #sliderBar.paper-slider #activeProgress.paper-progress {
+        background-color: #FFB943;
+      } 
+
+      #sticky-footer paper-slider {
+        width: 100%;
+      }
     </style>
-    <div id="cars" class="self-center">
+    <div id="cars" class="container self-center">
       <div class="centered self-center">
-        <template id="carList" is="dom-repeat" items="{{cars}}" filter="inRange" observes="budget">
-          <car-tile make="{{item.make}}" model="{{item.model}}" img="{{item.img}}" price="{{item.price}}" meta="{{item.meta}}" first_name="{{first_name}}" last_name="{{last_name}}" email="{{email}}" postcode="{{postcode}}" shares="{{shares}}"></car-tile>
+        <template id="carList" is="dom-repeat" items="[[cars]]" filter="inRange" observes="budget">
+          <car-tile imga="[[item.imga]]" make="[[item.make]]" model="[[item.model]]" img="[[item.img]]" price="[[item.price]]" meta="[[item.meta]]" first_name="{{first_name}}" last_name="{{last_name}}" email="{{email}}" postcode="{{postcode}}" shares="{{shares}}"></car-tile>
         </template>
         <div class="car-shim">&nbsp;</div>
       </div>
     </div>
     <div id="sticky-footer" class="layout horizontal">
       <div class="flex self-centered centered">
-        <h4>£<span>{{budget}}</span></h4>
-
+        <div>
+          <div class="number-display">£<span>{{budget}}</span></div>
+        </div>
         <paper-slider id="budgetSlider" class="red" value="{{budget}}" min="200" max="2000" step="50" editable></paper-slider>
 
       </div>
       <div class="flex self-centered centered">
-        <h4><span>{{shares}}</span> shares</h4>
-
+        <div>
+          <div class="number-display"><span>{{shares}}</span> shares</div>
+        </div>
         <paper-slider id="sharesSlider" class="red" value="{{shares}}" min="0" max="20" editable></paper-slider>
       </div>
     </div>

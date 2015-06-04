@@ -7,10 +7,26 @@
       h3 {
         max-width: 36em;
       }
+
+      :root {
+        margin-top: 24px;
+      }
+
+      .container paper-slider #sliderKnobInner.paper-slider {
+        background-color: #FFB943;
+      }
+
+      .container paper-slider.paper-slider-0:not([disabled]) #sliderBar.paper-slider #activeProgress.paper-progress {
+        background-color: #FFB943;
+      } 
+
+      paper-fab.yellow {
+        background: #FFB943;
+      }
       
     </style>
 
-      <div class="flex layout horizontal self-center">
+      <div class="flex layout horizontal self-center container">
         <div class="centered self-center">
           <h3>How many days would you be willing to allow someone else to drive your car each month?</h3>
 
@@ -18,7 +34,7 @@
 
           <h1>{{immediateShares}}</h1>
         
-          <paper-fab icon="arrow-forward" on-click="forward"></paper-fab>
+          <paper-fab class="yellow" icon="arrow-forward" on-click="forward"></paper-fab>
           
           <p on-click="skip">or skip</p>
         </div>

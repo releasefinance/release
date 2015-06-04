@@ -3,21 +3,38 @@
 <link rel="import" href="../bower_components/paper-fab/paper-fab.html">
 <polymer-element name="budget-page" extends="release-animated-page">
   <template>
-    <style>
+    <style shim-shadowdom>
+      :root {
+        margin-top: 24px;
+      }
       
+      .container paper-slider #sliderKnobInner.paper-slider {
+        background-color: #FFB943;
+      }
+
+      .container paper-slider.paper-slider-0:not([disabled]) #sliderBar.paper-slider #activeProgress.paper-progress {
+        background-color: #FFB943;
+      } 
+
+      paper-fab.yellow {
+        background: #FFB943;
+      }
     </style>
 
-      <div class="flex layout horizontal self-center">
-        <div class="self-center centered">
+    <div class="flex layout horizontal self-center">
+      <div class="self-center centered">
+        <div class="container">
+          <h4>See the car you can own with Release</h4>
           <h3>What is your monthly budget?</h3>
 
           <paper-slider id="valueSlider" class="red" on-immediate-value-change="valueChange" snaps="true" step="50" value="{{budget}}" min="200" max="2000"></paper-slider>
 
           <h1>{{displayPrice(immediateBudget)}}</h1>
        
-          <paper-fab icon="arrow-forward" on-click="forward"></paper-fab>
+          <paper-fab class="yellow" icon="arrow-forward" on-click="forward"></paper-fab>
         </div>
       </div>
+    </div>
   </template>
   <script>
     Polymer({
