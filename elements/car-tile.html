@@ -75,7 +75,7 @@
       }
 
       .big-image-height-shim {
-        
+
       }
 
       .quote-form {
@@ -125,6 +125,13 @@
 
       #listing h2 {
         text-decoration: underline;
+        margin-bottom: 5px;
+        margin-top: 5px;
+      }
+
+      #listing h3 {
+        margin-bottom: 0;
+        margin-top: 0;
       }
 
       /*.overlay {
@@ -135,9 +142,9 @@
         background-color: rgba(64,64,64,0.5);
         position: absolute;
         z-index: 1;
-        -webkit-transition:background-color 0.5s ease-in; 
-        -moz-transition:background-color 0.5s ease-in; 
-        -o-transition:background-color 0.5s ease-in; 
+        -webkit-transition:background-color 0.5s ease-in;
+        -moz-transition:background-color 0.5s ease-in;
+        -o-transition:background-color 0.5s ease-in;
         transition:background-color 0.5s ease-in;
       }*/
 
@@ -263,10 +270,6 @@
         width: 100%;
       }
 
-      .car-thumb-display {
-        padding-bottom: 1em;
-      }
-
       .make-and-model {
         padding-bottom: 2em;
       }
@@ -292,6 +295,19 @@
         text-transform: uppercase;
         font-weight: lighter;
         color: #666;
+      }
+
+      #card #listing {
+        background: #fff;
+        border: solid 1px rgba(00,00,00,.07);
+        padding: 20px;
+        padding-bottom: 0;
+        margin-bottom: 30px;
+        border-radius: 20px;
+      }
+
+      #card:hover #listing {
+        border: solid 1px rgba(00,00,00,.2);
       }
 
     </style>
@@ -364,7 +380,7 @@
                   </div>
                 </div>
               </div>
-              
+
               <a class="cta-button" on-click="quote">Get a quote now</a>
 
               <p>Based on lending the car</p>
@@ -372,7 +388,7 @@
 
               <paper-slider id="sharesSlider" class="red" value="{{shares}}" min="0" max="20" editable></paper-slider>
 
-              
+
               <div class="ts-and-cs">
                 <p>3 months deposit and 36 monthly payments.</p>
                 <p>Lending your vehicle to a friend or relative requires either party to use our mobile app which covers the borrower with fully comprehensive insurance and automatically reduces your monthly direct debit.</p>
@@ -382,7 +398,7 @@
           </div>
           <div class="centered self-center flex layout horizontal">
             <div class="self-center flex">
-              
+
             </div>
           </div>
         </div>
@@ -404,7 +420,7 @@
         </div>
       </div>
     </neon-animated-pages>
-      
+
   </template>
   <script>
     Polymer({
