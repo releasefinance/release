@@ -26,13 +26,14 @@
 
     </style>
 
+    <div class="body-bg"></div>
     <neon-animated-pages selected="{{page}}" class="flex layout vertical" transition="cross-fade" entry-animation="fade-in-animation" exit-animation="fade-out-animation">
 
       <budget-page budget="{{budget}}" on-forward="forward" class="center-justified flex layout vertical"></budget-page>
 
       <shares-page shares="{{shares}}" on-forward="forward" class="center-justified flex layout vertical"></shares-page>
 
-      <main-page shares="{{shares}}" budget="{{budget}}" on-forward="forward" cars="{{cars}}" first_name="{{first_name}}" last_name="{{last_name}}" email="{{email}}" class="center center-justified flex layout vertical"></main-page>
+      <main-page shares="{{shares}}" budget="{{budget}}" on-forward="forward" cars="{{cars}}" first_name="{{first_name}}" last_name="{{last_name}}" email="{{email}}" class="center-justified flex layout vertical"></main-page>
 
     </neon-animated-pages>
   </template>
@@ -43,7 +44,7 @@
       properties: {
         page: {
           type: Number,
-          value: 0
+          value: 2
         },
         first_name: String,
         last_name: String,
