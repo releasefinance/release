@@ -281,10 +281,30 @@
         width: 100%;
       }
 
+      @media (max-width: 800px) {
+        .info-thumb {
+          display: none;
+        }
+      }
+
       .info {
         margin: auto;
         max-width: 980px;
       }
+
+      @media (max-width: 800px) {
+        .info {
+          padding: 20px;
+        }
+      }
+
+
+      @media (max-width: 800px) {
+        .info {
+          padding: 20px;
+        }
+      }
+
 
       .info-title {
         text-align: left;
@@ -369,7 +389,7 @@
               <img src$="{{imga}}">
             </div>
             <div class="flex flex-2">
-              <div class="layout horizontal">
+              <div class="info-content">
                 <div class="flex info-title">
                   <h3 class="info-make">{{make}}</h3>
                   <h2 class="info-model">{{model}}</h2>
