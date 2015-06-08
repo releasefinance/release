@@ -79,11 +79,15 @@
       #sticky-footer paper-slider {
         width: 100%;
       }
+
+      .hidden {
+        display: none;
+      }
     </style>
     <div id="cars" class="container self-center">
       <div class="centered self-center">
-        <template id="carList" is="dom-repeat" items="[[cars]]" filter="inRange" observes="budget">
-          <car-tile imga="[[item.imga]]" make="[[item.make]]" model="[[item.model]]" img="[[item.img]]" price="[[item.price]]" meta="[[item.meta]]" first_name="{{first_name}}" last_name="{{last_name}}" email="{{email}}" postcode="{{postcode}}" shares="{{shares}}"></car-tile>
+        <template id="carList" is="dom-repeat" items="[[cars]]">
+          <car-tile car="[[item]]" email="{{email}}" budget="[[budget]]" shares="{{shares}}" class$="[[visibleClass(item,budget)]]"></car-tile>
         </template>
         <div class="car-shim">&nbsp;</div>
       </div>
@@ -162,6 +166,15 @@
 
       inRange: function(item) {
         return((item.price < (this.budget + 100)) && (item.price > (this.budget - 100)));
+      },
+
+      visibleClass: function(item,budget) {
+        var visible = ((item.price < (budget * 1.1)) && (item.price > (budget * 0.9)));
+        if(visible) {
+          return "visible";
+        } else {
+          return "hidden";
+        }
       }
     });
 
