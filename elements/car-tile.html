@@ -358,7 +358,7 @@
           <div class="deal layout horizontal">
             <div class="flex now">
               <div class="price-description">with sharing</div>
-              <div class="price">£<span>[[car.discounted_price]]</span></div>
+              <div class="price">£<span>[[discounted_price]]</span></div>
             </div>
             <div class="flex was">
               <div class="price-description">without</div>
@@ -404,7 +404,7 @@
                 <div class="deal large-deal layout horizontal flex">
                   <div class="flex now self-center">
                     <div class="price-description">with sharing</div>
-                    <div class="price">£<span>[[car.discounted_price]]</span></div>
+                    <div class="price">£<span>[[discounted_price]]</span></div>
                   </div>
                   <div class="flex was self-center">
                     <div class="price-description">without</div>
@@ -472,7 +472,7 @@
         },
         discounted_price: {
           type: Number,
-          observer: 'discounted(shares)'
+          computed: 'discounted(shares,car)'
         },
         car: Object,
         meta: String,
@@ -554,8 +554,13 @@
           this.page = 0;
         }
       },
-      discounted: function(shares) {
-        return(Math.floor((20 - shares) * (this.price / 20.0 )));
+      discounted: function(shares,car) {
+        console.log('calc discounted', shares, car);
+        if(!this.car) {
+          return(0);
+        } else {
+          return(Math.floor((20 - this.shares) * (this.car.price / 20.0 )));
+        }
       },
       ready: function() {
         console.log("car-tile", this.car);

@@ -130,8 +130,8 @@
     </div>
     <div id="cars" class="container self-center">
       <div class="centered self-center">
-        <template id="carList" is="dom-repeat" items="[[cars]]">
-          <car-tile car="[[item]]" email="{{email}}" budget="[[budget]]" shares="{{shares}}" class$="[[visibleClass(item,budget)]]"></car-tile>
+        <template id="carList" is="dom-repeat" items="[[cars]]" filter="inRange">
+          <car-tile car="[[item]]" email="{{email}}" budget="[[budget]]" shares="{{shares}}"></car-tile>
         </template>
         <div class="car-shim">&nbsp;</div>
       </div>
@@ -209,7 +209,7 @@
       },
 
       inRange: function(item) {
-        return((item.price < (this.budget + 100)) && (item.price > (this.budget - 100)));
+        return((item.price < (this.budget *1.1)) && (item.price > (this.budget * 0.9)));
       },
 
       visibleClass: function(item,budget) {

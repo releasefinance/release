@@ -28,6 +28,8 @@
     </style>
 
     <div class="body-bg"></div>
+
+    <iron-a11y-keys target="[[keysTarget]]" keys="enter" on-keys-pressed="forward"></iron-a11y-keys>
     <neon-animated-pages selected="{{page}}" class="flex layout vertical" transition="cross-fade" entry-animation="fade-in-animation" exit-animation="fade-out-animation">
 
       <budget-page budget="{{budget}}" on-forward="forward" class="center-justified flex layout vertical"></budget-page>
@@ -66,20 +68,24 @@
           type: Array,
           value: [],
           notify: true
+        },
+        keysTarget: {
+          type: Object,
+          value: function() {
+            return document.body;
+          }
         }
       },
 
       forward: function() {
-        if(this.page == 5) {
-          this.page = 0;
-        } else {
-          this.page = this.page + 1;
-        }
-        analytics.track('Page ' + this.page);
-        if(this.page == 2) {
-          this.async(function() {
-            this.setupCars();
-          },1000);
+        if(this.page < 3 ) {
+          this.page = this.page + 1;        
+          analytics.track('Page ' + this.page);
+          if(this.page == 2) {
+            this.async(function() {
+              this.setupCars();
+            },1000);
+          }
         }
       },
       ready: function() {
@@ -93,7 +99,7 @@
           this.set('cars', window.cars);
           this.forward();
         });
-      }
+      },
 
     });
   </script>
