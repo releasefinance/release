@@ -124,11 +124,15 @@
     .hidden {
       display: none;
     }
+
+    .your-available {
+      margin-left: 0.5em;
+    }
   </style>
   <template>
     <div class="results-intro">
 
-      <h2>Your available cars</h2>
+      <h2 class="your-available">Your available cars</h2>
 
 
     </div>
@@ -145,7 +149,7 @@
         <div>
           <div class="number-display">£<span>{{budget}}</span></div>
         </div>
-        <paper-slider id="budgetSlider" class="red" value="{{budget}}" min="200" max="2000" step="50" editable></paper-slider>
+        <paper-slider id="budgetSlider" class="red" value="{{budget}}" min="250" max="1400" step="50" editable></paper-slider>
 
       </div>
       <div class="flex self-centered centered">
