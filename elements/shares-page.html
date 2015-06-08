@@ -24,6 +24,11 @@
         background: #FFB943;
       }
 
+      .skip {
+        margin-top: 60px;
+        text-decoration: underline;
+      }
+
     </style>
 
       <div class="flex layout horizontal self-center container">
@@ -36,7 +41,7 @@
 
           <paper-fab class="yellow" icon="arrow-forward" on-click="forward"></paper-fab>
 
-          <p on-click="skip">Prefer not to share my car</p>
+          <p class="skip" on-click="skip">Prefer not to share my car</p>
         </div>
       </div>
   </template>
