@@ -3,26 +3,32 @@
 <link rel="import" href="../bower_components/paper-spinner/paper-spinner.html">
 
 <link rel="import" href="../bower_components/paper-fab/paper-fab.html">
-<polymer-element name="budget-page" extends="release-animated-page">
+
+<dom-module id="budget-page">
+  
+  <style shim-shadowdom>
+    :root {
+      margin-top: 24px;
+    }
+
+    .container {
+      text-align: center;
+    }
+    
+    .container paper-slider /deep/ #sliderKnobInner.paper-slider {
+      background-color: #FFB943;
+    }
+
+    .container paper-slider.paper-slider-0:not([disabled]) /deep/ #sliderBar.paper-slider #activeProgress.paper-progress {
+      background-color: #FFB943;
+    } 
+
+    paper-fab.yellow {
+      background: #FFB943;
+    }
+
+  </style>
   <template>
-    <style shim-shadowdom>
-      :root {
-        margin-top: 24px;
-      }
-
-      .container paper-slider #sliderKnobInner.paper-slider {
-        background-color: #FFB943;
-      }
-
-      .container paper-slider.paper-slider-0:not([disabled]) #sliderBar.paper-slider #activeProgress.paper-progress {
-        background-color: #FFB943;
-      }
-
-      paper-fab.yellow {
-        background: #FFB943;
-      }
-    </style>
-
     <div class="flex layout horizontal self-center">
       <div class="self-center centered">
         <div class="container">
@@ -36,34 +42,34 @@
       </div>
     </div>
   </template>
-  <script>
-    Polymer({
-      is: "budget-page",
-      properties: {
-        budget: {
-          type: Number,
-          notify: true
-        },
-        immediateBudget: Number,
+</dom-module>
+<script>
+  Polymer({
+    is: "budget-page",
+    properties: {
+      budget: {
+        type: Number,
+        notify: true
       },
-      ready: function() {
-        this.immediateBudget = this.budget;
-      },
-      forward: function() {
-        //analytics.track('Chose Days', { days: this.order.days });
-        this.fire('forward');
-      },
-      valueChange: function() {
-        this.immediateBudget = this.$.valueSlider.immediateValue;
-      },
-      displayPrice: function(budget) {
-        if(budget) {
-          return('£' + (parseInt(budget)));
-        } else {
-          return('£0');
-        }
+      immediateBudget: Number,
+    },
+    ready: function() {
+      this.immediateBudget = this.budget;
+    },
+    forward: function() {
+      //analytics.track('Chose Days', { days: this.order.days });
+      this.fire('forward');
+    },
+    valueChange: function() {
+      this.immediateBudget = this.$.valueSlider.immediateValue;
+    },
+    displayPrice: function(budget) {
+      if(budget) {
+        return('£' + (parseInt(budget)));
+      } else {
+        return('£0');
       }
-    });
+    }
+  });
 
-  </script>
-</polymer-element>
+</script>
