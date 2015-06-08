@@ -12,6 +12,10 @@
       margin-top: 24px;
     }
 
+    .container {
+      text-align: center;
+    }
+
     .container paper-slider #sliderKnobInner.paper-slider {
       background-color: #FFB943;
     }
@@ -29,15 +33,17 @@
   <template>
     <div class="flex layout horizontal self-center container">
       <div class="centered self-center">
-        <h3>How many days would you be willing to allow someone else to drive your car each month?</h3>
+        <div class="container">
+          <h3>How many days a month would you be willing to allow someone else to drive your car?</h3>
 
-        <paper-slider id="valueSlider" class="red" on-immediate-value-change="valueChange" value="{{shares}}" min="0" max="20"></paper-slider>
+          <paper-slider id="valueSlider" class="red" on-immediate-value-change="valueChange" value="{{shares}}" min="0" max="20"></paper-slider>
 
-        <h1>{{immediateShares}}</h1>
-      
-        <paper-fab class="yellow" icon="arrow-forward" on-click="forward"></paper-fab>
-        
-        <p on-click="skip">or skip</p>
+          <h1>{{immediateShares}}</h1>
+
+          <paper-fab class="yellow" icon="arrow-forward" on-click="forward"></paper-fab>
+
+          <p class="skip" on-click="skip">Prefer not to share my car</p>
+        </div>
       </div>
     </div>
   </template>

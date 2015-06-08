@@ -123,8 +123,8 @@
   <template>
     <div class="results-intro">
 
-      <p>Here are the cars available to you on Release.</p>
-      <p>Adjust budget and days to explore other options…</p>
+      <h2>Your available cars</h2>
+
 
     </div>
     <div id="cars" class="container self-center">
@@ -145,7 +145,7 @@
       </div>
       <div class="flex self-centered centered">
         <div>
-          <div class="number-display"><span>{{shares}}</span> shares</div>
+          <div class="number-display"><span>{{shares}}</span> days</div>
         </div>
         <paper-slider id="sharesSlider" class="red" value="{{shares}}" min="0" max="20" editable></paper-slider>
       </div>

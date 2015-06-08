@@ -3,11 +3,16 @@
 <link rel="import" href="../bower_components/paper-spinner/paper-spinner.html">
 
 <link rel="import" href="../bower_components/paper-fab/paper-fab.html">
+
 <dom-module id="budget-page">
   
   <style shim-shadowdom>
     :root {
       margin-top: 24px;
+    }
+
+    .container {
+      text-align: center;
     }
     
     .container paper-slider #sliderKnobInner.paper-slider {
@@ -21,17 +26,17 @@
     paper-fab.yellow {
       background: #FFB943;
     }
+
   </style>
   <template>
     <div class="flex layout horizontal self-center">
       <div class="self-center centered">
         <div class="container">
-          <h4>See the car you can own with Release</h4>
-          <h3>What is your monthly budget?</h3>
+          <h3>Tell us your approximate monthly budget?</h3>
           <paper-slider id="valueSlider" class="red" on-immediate-value-change="valueChange" snaps="true" step="50" value="{{budget}}" min="200" max="2000"></paper-slider>
 
           <h1>{{displayPrice(immediateBudget)}}</h1>
-       
+
           <paper-fab class="yellow" icon="arrow-forward" on-click="forward"></paper-fab>
         </div>
       </div>
