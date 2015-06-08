@@ -1,9 +1,8 @@
 <link rel="import" href="../bower_components/iron-a11y-keys/iron-a11y-keys.html">
 
-<polymer-element name="car-tile" >
+<dom-module id="car-tile" >
   <template>
     <style shim-shadowdom>
-
 
       neon-animated-pages {
         height: 100%;
@@ -454,117 +453,117 @@
     </neon-animated-pages>
 
   </template>
-  <script>
-    Polymer({
-      is: "car-tile",
-      behaviors: [
-        Polymer.IronA11yKeysBehavior
-      ],
+</dom-module>
+<script>
+  Polymer({
+    is: "car-tile",
+    behaviors: [
+      Polymer.IronA11yKeysBehavior
+    ],
 
-      keyBindings: {
-        'esc': '_updatePressed'
+    keyBindings: {
+      'esc': '_updatePressed'
+    },
+
+    properties: {
+      page: {
+        type: Number,
+        value: 0
       },
-
-      properties: {
-        page: {
-          type: Number,
-          value: 0
-        },
-        discounted_price: {
-          type: Number,
-          computed: 'discounted(shares,car)'
-        },
-        car: Object,
-        meta: String,
-        make: String,
-        model: String,
-        monthly: Number,
-        discount: Number,
-        engine: Number,
-        doors: Number,
-        description: String,
-        img: String,
-        imga: {
-          type: String,
-          value: "hello"
-        },
-        first_name: {
-          type: String,
-          value: ""
-        },
-        last_name: {
-          type: String,
-          value: ""
-        },
-        email: {
-          type: String,
-          value: "",
-          notify: true
-        },
-        postcode: {
-          type: String,
-        },
-        shares: {
-          type: Number,
-          value: 0,
-          notify: true
-        },
-        target: {
-          type: Object,
-          value: function() {
-            return document.body;
-          }
+      discounted_price: {
+        type: Number,
+        computed: 'discounted(shares,car)'
+      },
+      car: Object,
+      meta: String,
+      make: String,
+      model: String,
+      monthly: Number,
+      discount: Number,
+      engine: Number,
+      doors: Number,
+      description: String,
+      img: String,
+      imga: {
+        type: String,
+        value: "hello"
+      },
+      first_name: {
+        type: String,
+        value: ""
+      },
+      last_name: {
+        type: String,
+        value: ""
+      },
+      email: {
+        type: String,
+        value: "",
+        notify: true
+      },
+      postcode: {
+        type: String,
+      },
+      shares: {
+        type: Number,
+        value: 0,
+        notify: true
+      },
+      target: {
+        type: Object,
+        value: function() {
+          return document.body;
         }
-      },
+      }
+    },
 
-      background: function(img) {
-        return("background-image: url('" + img + "');");
-      },
-      show: function() {
-        analytics.track('show', {make: this.make, model: this.model, meta: this.meta, price: this.price, discounted_price: this.discounted_price});
-        this.page = 1;
-      },
-      hide: function() {
+    background: function(img) {
+      return("background-image: url('" + img + "');");
+    },
+    show: function() {
+      analytics.track('show', {make: this.make, model: this.model, meta: this.meta, price: this.price, discounted_price: this.discounted_price});
+      this.page = 1;
+    },
+    hide: function() {
+      analytics.track('hide');
+      this.page = 0;
+    },
+    quote: function() {
+      if(this.email == null || this.email == "") {
+        analytics.track('quote form');
+        this.page = 2;
+      } else {
+        this.trackQuote();
+      }
+    },
+    submit: function() {
+      analytics.identify({email: this.email, first_name: this.first_name, last_name: this.last_name, postcode: this.postcode});
+      this.trackQuote();
+    },
+    trackQuote: function() {
+      analytics.track('quote', {make: this.make, model: this.model, meta: this.meta,price: this.price, discounted_price: this.discounted_price});
+      this.page = 3;
+      var ctx = this;
+      setTimeout(function() {
+        ctx.hide();
+      },2000);
+    },
+    _escPressed: function(event) {
+      if(this.page !== 0) {
         analytics.track('hide');
         this.page = 0;
-      },
-      quote: function() {
-        if(this.email == null || this.email == "") {
-          analytics.track('quote form');
-          this.page = 2;
-        } else {
-          this.trackQuote();
-        }
-      },
-      submit: function() {
-        analytics.identify({email: this.email, first_name: this.first_name, last_name: this.last_name, postcode: this.postcode});
-        this.trackQuote();
-      },
-      trackQuote: function() {
-        analytics.track('quote', {make: this.make, model: this.model, meta: this.meta,price: this.price, discounted_price: this.discounted_price});
-        this.page = 3;
-        var ctx = this;
-        setTimeout(function() {
-          ctx.hide();
-        },2000);
-      },
-      _escPressed: function(event) {
-        if(this.page !== 0) {
-          analytics.track('hide');
-          this.page = 0;
-        }
-      },
-      discounted: function(shares,car) {
-        console.log('calc discounted', shares, car);
-        if(!this.car) {
-          return(0);
-        } else {
-          return(Math.floor((20 - this.shares) * (this.car.price / 20.0 )));
-        }
-      },
-      ready: function() {
-        console.log("car-tile", this.car);
       }
-    });
-  </script>
-</polymer-element>
+    },
+    discounted: function(shares,car) {
+      console.log('calc discounted', shares, car);
+      if(!this.car) {
+        return(0);
+      } else {
+        return(Math.floor((20 - this.shares) * (this.car.price / 20.0 )));
+      }
+    },
+    ready: function() {
+      console.log("car-tile", this.car);
+    }
+  });
+</script>
