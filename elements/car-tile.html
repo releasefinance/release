@@ -19,7 +19,7 @@
     }
 
     .showing-inner {
-      min-height: 100vh;
+      min-height: 100%;
       width: 100%;
     }
 
@@ -59,13 +59,12 @@
       top: 10px;
       left: 20px;
       font-size: 32px;
-      color: white;
+      color: #222;
       cursor: pointer;
       padding: 10px;
     }
 
     .big-image {
-      height: 50vh;
       width: 100%;
       background-size: cover;
       background-repeat: no-repeat;
@@ -287,6 +286,10 @@
       width: 100%;
     }
 
+    #sharesSlider /deep/ paper-input {
+      display: none;
+    }
+    
     @media (max-width: 800px) {
       .info-thumb {
         display: none;
@@ -425,7 +428,9 @@
                 </div>
               </div>
 
-              <a class="cta-button" on-click="quote">Get a quote now</a>
+              <div class="cta">
+                <a class="cta-button" on-click="quote">Get a quote now</a>
+              </div>
 
               <p>Based on lending the car</p>
               <h2><span>[[shares]]</span>&times; per month</h2>
