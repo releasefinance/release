@@ -27,6 +27,7 @@
 
     </style>
 
+    <div class="body-bg"></div>
     <neon-animated-pages selected="{{page}}" class="flex layout vertical" transition="cross-fade" entry-animation="fade-in-animation" exit-animation="fade-out-animation">
 
       <budget-page budget="{{budget}}" on-forward="forward" class="center-justified flex layout vertical"></budget-page>
@@ -40,7 +41,7 @@
         </div>
       </div>
 
-      <main-page shares="{{shares}}" budget="{{budget}}" on-forward="forward" cars="{{cars}}" first_name="{{first_name}}" last_name="{{last_name}}" email="{{email}}" class="center center-justified flex layout vertical"></main-page>
+      <main-page shares="{{shares}}" budget="{{budget}}" on-forward="forward" cars="{{cars}}" first_name="{{first_name}}" last_name="{{last_name}}" email="{{email}}" class="center-justified flex layout vertical"></main-page>
 
     </neon-animated-pages>
   </template>
@@ -60,14 +61,14 @@
         budget: Number,
         shares: Number,
         car: Object,
-        
+
         cars: {
           type: Array,
           value: [],
           notify: true
         }
       },
-      
+
       forward: function() {
         if(this.page == 5) {
           this.page = 0;
