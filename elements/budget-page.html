@@ -1,5 +1,7 @@
 <link rel="import" href="./release-animated-page.html">
 <link rel="import" href="../bower_components/paper-slider/paper-slider.html">
+<link rel="import" href="../bower_components/paper-spinner/paper-spinner.html">
+
 <link rel="import" href="../bower_components/paper-fab/paper-fab.html">
 <polymer-element name="budget-page" extends="release-animated-page">
   <template>
@@ -25,7 +27,6 @@
       <div class="self-center centered">
         <div class="container">
           <h3>Tell us your approximate monthly budget?</h3>
-
           <paper-slider id="valueSlider" class="red" on-immediate-value-change="valueChange" snaps="true" step="50" value="{{budget}}" min="200" max="2000"></paper-slider>
 
           <h1>{{displayPrice(immediateBudget)}}</h1>

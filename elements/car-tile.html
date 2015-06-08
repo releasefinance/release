@@ -229,6 +229,11 @@
         font-weight: light;
       }
 
+      .cta {
+        margin-top: 2em;
+        margin-bottom: 3em;
+      }
+
       .cta-button {
         display: inline-block;
         height: 38px;
@@ -346,29 +351,29 @@
           on-keys-pressed="_escPressed">
         </iron-a11y-keys>
 
-    <neon-animated-pages selected="{{page}}" class="flex layout horizontal self-center" transition="cross-fade" entry-animation="fade-in-animation" exit-animation="fade-out-animation">
+    <neon-animated-pages selected="[[page]]" class="flex layout horizontal self-center" transition="cross-fade" entry-animation="fade-in-animation" exit-animation="fade-out-animation">
 
       <div id="card" class="layout horizontal flex" on-tap="show">
         <div id="listing" class="layout vertical flex">
           <div class="deal layout horizontal">
             <div class="flex now">
               <div class="price-description">with sharing</div>
-              <div class="price">£<span>{{discounted_price}}</span></div>
+              <div class="price">£<span>[[car.discounted_price]]</span></div>
             </div>
             <div class="flex was">
               <div class="price-description">without</div>
-              <div class="price">£<span>{{price}}</span></div>
+              <div class="price">£<span>[[car.price]]</span></div>
             </div>
           </div>
 
           <div class="car-thumb-display flex">
-            <img class="car-thumb" src$="[[imga]]">
+            <img class="car-thumb" src$="[[car.imga]]">
           </div>
 
           <div class="make-and-model flex-4 flex centered self-center">
-            <h3>{{make}}</h3>
-            <h2>{{model}}</h2>
-            <h3>{{meta}}</h3>
+            <h3>[[car.make]]</h3>
+            <h2>[[car.model]]</h2>
+            <h3>[[car.meta]]</h3>
           </div>
 
         </div>
@@ -376,7 +381,7 @@
       </div>
       <div id="showing">
         <div class="showing-inner layout vertical flex">
-          <div class="big-image layout vertical" style$="{{background(img)}}">
+          <div class="big-image layout vertical" style$="{{background(car.img)}}">
             <div class="close" on-tap="hide">&times;</div>
             <div class="self-center flex flex-5">
             </div>
@@ -386,24 +391,24 @@
           </div>
           <div class="info centered self-center flex layout horizontal">
             <div class="info-thumb flex flex-1">
-              <img src$="{{imga}}">
+              <img src$="[[car.imga]]">
             </div>
             <div class="flex flex-2">
               <div class="info-content">
                 <div class="flex info-title">
-                  <h3 class="info-make">{{make}}</h3>
-                  <h2 class="info-model">{{model}}</h2>
-                  <h3 class="info-meta">{{meta}}</h3>
+                  <h3 class="info-make">[[car.make]]</h3>
+                  <h1 class="info-model">[[car.model]]</h1>
+                  <h3 class="info-meta">[[car.meta]]</h3>
                 </div>
 
-                <div class="deal layout horizontal flex">
+                <div class="deal large-deal layout horizontal flex">
                   <div class="flex now self-center">
                     <div class="price-description">with sharing</div>
-                    <div class="price">£<span>{{discounted_price}}</span></div>
+                    <div class="price">£<span>[[car.discounted_price]]</span></div>
                   </div>
                   <div class="flex was self-center">
                     <div class="price-description">without</div>
-                    <div class="price">£<span>{{price}}</span></div>
+                    <div class="price">£<span>[[car.price]]</span></div>
                   </div>
                 </div>
               </div>
@@ -411,7 +416,7 @@
               <a class="cta-button" on-click="quote">Get a quote now</a>
 
               <p>Based on lending the car</p>
-              <h2><span>{{shares}}</span>&times; per month</h2>
+              <h2><span>[[shares]]</span>&times; per month</h2>
 
               <paper-slider id="sharesSlider" class="red" value="{{shares}}" min="0" max="20" editable></paper-slider>
 
@@ -467,8 +472,9 @@
         },
         discounted_price: {
           type: Number,
-          computed: 'discounted(price,shares)'
+          observer: 'discounted(shares)'
         },
+        car: Object,
         meta: String,
         make: String,
         model: String,
@@ -484,13 +490,11 @@
         },
         first_name: {
           type: String,
-          value: "",
-          notify: true
+          value: ""
         },
         last_name: {
           type: String,
-          value: "",
-          notify: true
+          value: ""
         },
         email: {
           type: String,
@@ -499,7 +503,6 @@
         },
         postcode: {
           type: String,
-          notify: true
         },
         shares: {
           type: Number,
@@ -513,11 +516,11 @@
           }
         }
       },
+
       background: function(img) {
         return("background-image: url('" + img + "');");
       },
       show: function() {
-        console.log("show");
         analytics.track('show', {make: this.make, model: this.model, meta: this.meta, price: this.price, discounted_price: this.discounted_price});
         this.page = 1;
       },
@@ -546,14 +549,16 @@
         },2000);
       },
       _escPressed: function(event) {
-        analytics.track('hide');
-        this.page = 0;
+        if(this.page !== 0) {
+          analytics.track('hide');
+          this.page = 0;
+        }
       },
-      discounted: function(price, shares) {
-        return(Math.floor((30 - shares) * (price / 30.0 )));
+      discounted: function(shares) {
+        return(Math.floor((20 - shares) * (this.price / 20.0 )));
       },
       ready: function() {
-        console.log("car-tile", this.make, this.imga, this.img);
+        console.log("car-tile", this.car);
       }
     });
   </script>
