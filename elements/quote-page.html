@@ -1,0 +1,72 @@
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-fab/paper-fab.html">
+
+<dom-module id="quote-page">
+  <style>
+  .container {
+    max-width: 30em;
+    margin: auto;
+  }
+  </style>
+  <template>
+    <div class="flex layout horizontal self-center">
+      <div class="flex self-center centered">
+        <div class="container">
+          <div id="quote" class="layout horizontal flex">
+            <div class="quote-form centered self-center">
+              <div class="close" on-tap="cancelQuote">&times;</div>
+              <h1>Request a quote</h1>
+              <h2><span>{{car.make}}</span> <span>{{car.model}}</span></h2>
+              <paper-input value="{{email}}" label="Your email"></paper-input>
+              <paper-input value="{{first_name}}" label="First name"></paper-input>
+              <paper-input value="{{last_name}}" label="Last name"></paper-input>
+              <paper-input value="{{postcode}}" label="Post code"></paper-input>
+              <paper-fab class="yellow" raised on-tap="submit" icon="arrow-forward" ></paper-fab>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </template>
+</dom-module>
+<script>
+  QuotePage = Polymer({
+    is: "quote-page",
+    properties: {
+      car: {
+        type: Object
+      },
+      first_name: {
+        type: String,
+        value: ""
+      },
+      last_name: {
+        type: String,
+        value: ""
+      },
+      email: {
+        type: String,
+        value: "",
+        notify: true
+      },
+      postcode: {
+        type: String,
+      },
+      shares: {
+        type: Number,
+        value: 0,
+        notify: true
+      }
+    },
+    
+    submit: function() {
+      analytics.identify({email: this.email, first_name: this.first_name, last_name: this.last_name, postcode: this.postcode});
+      this.fire('thanks-quote');
+    },
+    cancelQuote: function() {
+      this.fire('cancel-quote');
+    }
+  });
+</script>
+      
+      

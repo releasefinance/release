@@ -448,22 +448,6 @@
           </div>
         </div>
       </div>
-      <div id="quote" class="layout horizontal flex">
-        <div class="quote-form centered self-center">
-          <div class="close" on-tap="hide">&times;</div>
-          <h1>Request a quote</h1>
-          <paper-input value="{{email}}" label="Your email"></paper-input>
-          <paper-input value="{{first_name}}" label="First name"></paper-input>
-          <paper-input value="{{last_name}}" label="Last name"></paper-input>
-          <paper-input value="{{postcode}}" label="Post code"></paper-input>
-          <paper-fab class="yellow" raised on-tap="submit" icon="arrow-forward" ></paper-fab>
-        </div>
-      </div>
-      <div id="thanks" class="layout horizontal flex">
-        <div class="thanks-message centered self-center">
-          <h3>Thanks!<br />We’ll be in touch</h3>
-        </div>
-      </div>
     </neon-animated-pages>
 
   </template>
@@ -502,22 +486,6 @@
         type: String,
         value: "hello"
       },
-      first_name: {
-        type: String,
-        value: ""
-      },
-      last_name: {
-        type: String,
-        value: ""
-      },
-      email: {
-        type: String,
-        value: "",
-        notify: true
-      },
-      postcode: {
-        type: String,
-      },
       shares: {
         type: Number,
         value: 0,
@@ -534,6 +502,7 @@
     background: function(img) {
       return("background-image: url('" + img + "');");
     },
+
     show: function() {
       analytics.track('show', {make: this.make, model: this.model, meta: this.meta, price: this.price, discounted_price: this.discounted_price});
       this.page = 1;
@@ -541,26 +510,6 @@
     hide: function() {
       analytics.track('hide');
       this.page = 0;
-    },
-    quote: function() {
-      if(this.email == null || this.email == "") {
-        analytics.track('quote form');
-        this.page = 2;
-      } else {
-        this.trackQuote();
-      }
-    },
-    submit: function() {
-      analytics.identify({email: this.email, first_name: this.first_name, last_name: this.last_name, postcode: this.postcode});
-      this.trackQuote();
-    },
-    trackQuote: function() {
-      analytics.track('quote', {make: this.make, model: this.model, meta: this.meta,price: this.price, discounted_price: this.discounted_price});
-      this.page = 3;
-      var ctx = this;
-      setTimeout(function() {
-        ctx.hide();
-      },2000);
     },
     _escPressed: function(event) {
       if(this.page !== 0) {
@@ -576,6 +525,14 @@
         return(Math.floor((20 - this.shares) * (this.car.price / 20.0 )));
       }
     },
+
+    quote: function() {
+      this.fire('show-quote', {car: this.car});
+      this.async(function() {
+        this.page = 0;
+      },2000);
+    },
+
     ready: function() {
       console.log("car-tile", this.car);
     }
