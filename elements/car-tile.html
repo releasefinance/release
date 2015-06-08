@@ -197,14 +197,18 @@
     }
 
     .ts-and-cs {
-      max-width: 36em;
+      width: 100%;
       margin: auto;
-      padding-left: 1em;
-      padding-right: 1em;
       text-align: left;
-      border-top: 1px solid #222;
-      padding-top: 2em;
-      margin-top: 2em;
+      padding: 2em 0;
+      background: #232323;
+      color: rgba(225,225,225,.7);
+      font-size: 11px;
+    }
+
+    .ts-and-cs-container {
+      max-width: 960px;
+      margin: 0 auto;
     }
 
     .quote-button paper-button {
@@ -289,7 +293,7 @@
     #sharesSlider /deep/ paper-input {
       display: none;
     }
-    
+
     @media (max-width: 800px) {
       .info-thumb {
         display: none;
@@ -437,18 +441,14 @@
 
               <paper-slider id="sharesSlider" class="red" value="{{shares}}" min="0" max="20" editable></paper-slider>
 
-
-              <div class="ts-and-cs">
-                <p><strong>Terms & Conditions</strong></p>
-                <p>* All vehicle images are for illustration purposes only.</p>
-                <p>** This example does not constitute an offer of credit. All offers of credit are subject to underwriting and approval. Price based on 3 months deposit upfront, 36 monthly payments and a mileage allowance of 12,000 miles per annum. You are liable for the full monthly amount should you not lend your car within a calendar month. Excess mileage charges may apply should you exceed your yearly mileage allowance.</p>
-                <p>*** Individual terms and conditions may apply.</p>
-              </div>
             </div>
           </div>
-          <div class="centered self-center flex layout horizontal">
-            <div class="self-center flex">
-
+          <div class="ts-and-cs">
+            <div class="ts-and-cs-container"
+              <p><strong>Terms & Conditions</strong></p>
+              <p>* All vehicle images are for illustration purposes only.</p>
+              <p>** This example does not constitute an offer of credit. All offers of credit are subject to underwriting and approval. Price based on 3 months deposit upfront, 36 monthly payments and a mileage allowance of 12,000 miles per annum. You are liable for the full monthly amount should you not lend your car within a calendar month. Excess mileage charges may apply should you exceed your yearly mileage allowance.</p>
+              <p>*** Individual terms and conditions may apply.</p>
             </div>
           </div>
         </div>

@@ -50,7 +50,7 @@
       <main-page shares="{{shares}}" budget="{{budget}}" on-forward="forward" cars="{{cars}}" car="{{car}}" class="center-justified flex layout vertical" on-show-quote="showQuote"></main-page>
 
       <quote-page first_name="{{first_name}}" last_name="{{last_name}}" email="{{email}}" car="{{car}}" class="layout horizontal flex" on-cancel-quote="cancelQuote" on-thanks-quote="thanksQuote"></quote-page>
-      
+
       <div id="thanks" class="layout horizontal flex">
         <div class="flex thanks-message centered self-center">
           <h3>Thanks!<br />We’ll be in touch</h3>
@@ -95,7 +95,7 @@
 
     forward: function() {
       if(this.page < 3 ) {
-        this.page = this.page + 1;        
+        this.page = this.page + 1;
         analytics.track('Page ' + this.page);
         if(this.page == 2) {
           this.async(function() {
