@@ -305,6 +305,17 @@
       .info {
         padding: 20px;
       }
+      #quote {
+        background: url('images/release_signup_bg.jpg') fixed;
+        background-size: cover;
+        background-position: center;
+      }
+
+      .quote-form {
+        padding: 3em;
+        background-color: #fff;
+        border-radius: 10px;
+      }
     }
 
 
@@ -419,9 +430,10 @@
 
 
               <div class="ts-and-cs">
-                <p>3 months deposit and 36 monthly payments.</p>
-                <p>Lending your vehicle to a friend or relative requires either party to use our mobile app which covers the borrower with fully comprehensive insurance and automatically reduces your monthly direct debit.</p>
-                <p>You are liable for the full monthly amount should you not lend your car within a calendar month. We use a third party credit check to ensure affordability.</p>
+                <p><strong>Terms & Conditions</strong></p>
+                <p>* All vehicle images are for illustration purposes only.</p>
+                <p>** This example does not constitute an offer of credit. All offers of credit are subject to underwriting and approval. Price based on 3 months deposit upfront, 36 monthly payments and a mileage allowance of 12,000 miles per annum. You are liable for the full monthly amount should you not lend your car within a calendar month. Excess mileage charges may apply should you exceed your yearly mileage allowance.</p>
+                <p>*** Individual terms and conditions may apply.</p>
               </div>
             </div>
           </div>
@@ -440,7 +452,7 @@
           <paper-input value="{{first_name}}" label="First name"></paper-input>
           <paper-input value="{{last_name}}" label="Last name"></paper-input>
           <paper-input value="{{postcode}}" label="Post code"></paper-input>
-          <paper-fab raised on-tap="submit" icon="arrow-forward" ></paper-fab>
+          <paper-fab class="yellow" raised on-tap="submit" icon="arrow-forward" ></paper-fab>
         </div>
       </div>
       <div id="thanks" class="layout horizontal flex">
