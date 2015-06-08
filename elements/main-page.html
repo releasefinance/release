@@ -97,14 +97,18 @@
       display: inline-block;
     }
 
-    #sticky-footer paper-slider #sliderKnobInner.paper-slider {
-      /*background-color: #FFB943;*/
-    }
-
-    #sticky-footer paper-slider.paper-slider-0:not([disabled]) #sliderBar.paper-slider #activeProgress.paper-progress {
+    #sticky-footer paper-slider /deep/ #sliderKnobInner.paper-slider {
       background-color: #FFB943;
     }
 
+    #sticky-footer paper-slider.paper-slider-0:not([disabled]) /deep/ #sliderBar.paper-slider #activeProgress.paper-progress {
+      background-color: #FFB943;
+    }
+
+    #sticky-footer paper-slider /deep/ paper-input {
+      display: none;
+    }
+    
     #sticky-footer paper-slider {
       width: 100%;
       background: #343434;
