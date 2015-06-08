@@ -1,71 +1,72 @@
 <link rel="import" href="./release-animated-page.html">
 <link rel="import" href="../bower_components/paper-slider/paper-slider.html">
 <link rel="import" href="../bower_components/paper-fab/paper-fab.html">
-<polymer-element name="shares-page" extends="release-animated-page" class="flex layout vertical">
+<dom-module id="shares-page">
+
+  <style>
+    h3 {
+      max-width: 36em;
+    }
+
+    :root {
+      margin-top: 24px;
+    }
+
+    .container paper-slider #sliderKnobInner.paper-slider {
+      background-color: #FFB943;
+    }
+
+    .container paper-slider.paper-slider-0:not([disabled]) #sliderBar.paper-slider #activeProgress.paper-progress {
+      background-color: #FFB943;
+    } 
+
+    paper-fab.yellow {
+      background: #FFB943;
+    }
+    
+  </style>
+
   <template>
-    <style>
-      h3 {
-        max-width: 36em;
-      }
+    <div class="flex layout horizontal self-center container">
+      <div class="centered self-center">
+        <h3>How many days would you be willing to allow someone else to drive your car each month?</h3>
 
-      :root {
-        margin-top: 24px;
-      }
+        <paper-slider id="valueSlider" class="red" on-immediate-value-change="valueChange" value="{{shares}}" min="0" max="20"></paper-slider>
 
-      .container paper-slider #sliderKnobInner.paper-slider {
-        background-color: #FFB943;
-      }
-
-      .container paper-slider.paper-slider-0:not([disabled]) #sliderBar.paper-slider #activeProgress.paper-progress {
-        background-color: #FFB943;
-      } 
-
-      paper-fab.yellow {
-        background: #FFB943;
-      }
+        <h1>{{immediateShares}}</h1>
       
-    </style>
-
-      <div class="flex layout horizontal self-center container">
-        <div class="centered self-center">
-          <h3>How many days would you be willing to allow someone else to drive your car each month?</h3>
-
-          <paper-slider id="valueSlider" class="red" on-immediate-value-change="valueChange" value="{{shares}}" min="0" max="20"></paper-slider>
-
-          <h1>{{immediateShares}}</h1>
+        <paper-fab class="yellow" icon="arrow-forward" on-click="forward"></paper-fab>
         
-          <paper-fab class="yellow" icon="arrow-forward" on-click="forward"></paper-fab>
-          
-          <p on-click="skip">or skip</p>
-        </div>
+        <p on-click="skip">or skip</p>
       </div>
+    </div>
   </template>
-  <script>
-    Polymer({
-      is: "shares-page",
-      properties: {
-        shares: {
-          type: Number,
-          notify: true
-        },
-        immediateShares: Number
+</dom-module>
+<script>
+  Polymer({
+    is: "shares-page",
+    properties: {
+      shares: {
+        type: Number,
+        notify: true
       },
-      ready: function() {
-        this.immediateShares = this.shares;
-      },
-      forward: function() {
-        //analytics.track('Chose Shares', { shares: this.shares });
-        this.fire('forward');
-      },
-      skip: function() {
-        this.shares = 0;
-        //analytics.track('Chose Shares', { shares: this.shares });
-        this.fire('forward');
-      },
-      valueChange: function() {
-        this.immediateShares = this.$.valueSlider.immediateValue;
-      }
-    });
+      immediateShares: Number
+    },
+    ready: function() {
+      this.immediateShares = this.shares;
+    },
+    forward: function() {
+      //analytics.track('Chose Shares', { shares: this.shares });
+      this.fire('forward');
+    },
+    skip: function() {
+      this.shares = 0;
+      //analytics.track('Chose Shares', { shares: this.shares });
+      this.fire('forward');
+    },
+    valueChange: function() {
+      this.immediateShares = this.$.valueSlider.immediateValue;
+    }
+  });
 
-  </script>
-</polymer-element>
+</script>

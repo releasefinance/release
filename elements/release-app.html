@@ -15,18 +15,17 @@
 <link rel="import" href="./shares-page.html">
 <link rel="import" href="./main-page.html">
 
-<polymer-element name="release-app" >
+<dom-module id="release-app" >
+  <style shim-shadowdom>
+    * {
+      font-family: input, sans-serif;
+    }
+    :root {
+      padding: 10px;
+    }
+
+  </style>
   <template>
-    <style shim-shadowdom>
-      * {
-        font-family: input, sans-serif;
-      }
-      :root {
-        padding: 10px;
-      }
-
-    </style>
-
     <div class="body-bg"></div>
 
     <iron-a11y-keys target="[[keysTarget]]" keys="enter" on-keys-pressed="forward"></iron-a11y-keys>
@@ -47,60 +46,60 @@
 
     </neon-animated-pages>
   </template>
-  <script>
-    Polymer({
-      is: "release-app",
+</dom-module>
+<script>
+  Polymer({
+    is: "release-app",
 
-      properties: {
-        page: {
-          type: Number,
-          value: 0
-        },
-        first_name: String,
-        last_name: String,
-        email: String,
-        postcode: String,
-        budget: Number,
-        shares: Number,
-        car: Object,
+    properties: {
+      page: {
+        type: Number,
+        value: 0
+      },
+      first_name: String,
+      last_name: String,
+      email: String,
+      postcode: String,
+      budget: Number,
+      shares: Number,
+      car: Object,
 
-        cars: {
-          type: Array,
-          value: [],
-          notify: true
-        },
-        keysTarget: {
-          type: Object,
-          value: function() {
-            return document.body;
-          }
+      cars: {
+        type: Array,
+        value: [],
+        notify: true
+      },
+      keysTarget: {
+        type: Object,
+        value: function() {
+          return document.body;
         }
-      },
+      }
+    },
 
-      forward: function() {
-        if(this.page < 3 ) {
-          this.page = this.page + 1;        
-          analytics.track('Page ' + this.page);
-          if(this.page == 2) {
-            this.async(function() {
-              this.setupCars();
-            },1000);
-          }
+    forward: function() {
+      if(this.page < 3 ) {
+        this.page = this.page + 1;        
+        analytics.track('Page ' + this.page);
+        if(this.page == 2) {
+          this.async(function() {
+            this.setupCars();
+          },1000);
         }
-      },
-      ready: function() {
-        analytics.track('View');
-        window.app = this;
-        this.budget = 400;
-        this.shares = 2;
-      },
-      setupCars: function() {
-        this.async(function() {
-          this.set('cars', window.cars);
-          this.forward();
-        });
-      },
+      }
+    },
+    ready: function() {
+      analytics.track('View');
+      window.app = this;
+      this.budget = 400;
+      this.shares = 2;
+    },
+    setupCars: function() {
+      this.async(function() {
+        this.set('cars', window.cars);
+        this.forward();
+      });
+    },
 
-    });
-  </script>
-</polymer-element>
+  });
+</script>
