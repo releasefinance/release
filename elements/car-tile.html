@@ -510,7 +510,7 @@
     },
 
     show: function() {
-      analytics.track('show', {make: this.make, model: this.model, meta: this.meta, price: this.price, discounted_price: this.discounted_price});
+      analytics.track('show', {make: this.car.make, model: this.car.model, meta: this.car.meta, price: this.car.price, discounted_price: this.discounted_price, shares: this.shares});
       this.page = 1;
     },
     hide: function() {

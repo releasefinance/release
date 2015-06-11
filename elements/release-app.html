@@ -117,6 +117,7 @@
       });
     },
     showQuote: function(data) {
+      console.log('showquote', data);
       this.set('car', data.detail.car);
       if(this.email == "") {
         this.page = 4;
