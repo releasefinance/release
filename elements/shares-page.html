@@ -24,8 +24,19 @@
       background-color: #FFB943;
     } 
 
+
+    .container paper-slider {
+      width: 100%;
+    }
+    
     paper-fab.yellow {
       background: #FFB943;
+    }
+
+    .instructions {
+      max-width: 40em;
+      text-align: left;
+      margin-bottom: 4em;
     }
     
   </style>
@@ -34,11 +45,17 @@
     <div class="flex layout horizontal self-center container">
       <div class="centered self-center">
         <div class="container">
-          <h3>How many days a month would you be willing to allow someone else to drive your car?</h3>
+          <div class="instructions">
+            <h3>
+              Roughly how many days per month would you share your car?
+              <br /><br />
+              We won't hold you to it – it's flexible.
+            </h3>
+          </div>
 
           <paper-slider id="valueSlider" class="red" on-immediate-value-change="valueChange" value="{{shares}}" min="0" max="20"></paper-slider>
 
-          <h1><span>{{immediateShares}}</span> days</h1>
+          <h1><span>{{immediateShares}}</span> days sharing per month</h1>
 
           <paper-fab class="yellow" icon="arrow-forward" on-click="forward"></paper-fab>
 

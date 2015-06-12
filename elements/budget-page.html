@@ -23,8 +23,22 @@
       background-color: #FFB943;
     } 
 
-    paper-fab.yellow {
+    paper-fab.yellow:not([disabled]) {
       background: #FFB943;
+    }
+
+    paper-fab.yellow[disabled] {
+      background: #ddd;
+    }
+
+    #valueSlider {
+      width: 100%;
+    }
+
+    .instructions {
+      max-width: 40em;
+      text-align: left;
+      margin-bottom: 4em;
     }
 
   </style>
@@ -32,12 +46,15 @@
     <div class="flex layout horizontal self-center">
       <div class="self-center centered">
         <div class="container">
-          <h3>What is your approximate monthly budget?</h3>
-          <paper-slider id="valueSlider" class="red" on-immediate-value-change="valueChange" snaps="true" step="50" value="{{budget}}" min="250" max="1400"></paper-slider>
+          <div class="instructions">
+            <h3>Reduce your direct debit for each day that you lend your car to someone you trust.</h3>
+            <h3>First, what is your approximate monthly budget?</h3>
+          </div>
+          <paper-slider id="valueSlider" class="red" on-immediate-value-change="valueChange" snaps="true" step="50" value="{{budget}}" min="0" max="1400"></paper-slider>
 
           <h1>{{displayPrice(immediateBudget)}}</h1>
 
-          <paper-fab class="yellow" icon="arrow-forward" on-click="forward"></paper-fab>
+          <paper-fab class="yellow" icon="arrow-forward" on-click="forward" disabled$="[[isDisabled(budget)]]"></paper-fab>
         </div>
       </div>
     </div>
@@ -68,6 +85,13 @@
         return('£' + (parseInt(budget)));
       } else {
         return('£0');
+      }
+    },
+    isDisabled: function(budget) {
+      if(budget < 100) {
+        return(true);
+      } else {
+        return(false);
       }
     }
   });

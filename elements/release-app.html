@@ -107,12 +107,12 @@
     ready: function() {
       analytics.track('View');
       window.app = this;
-      this.budget = 400;
+      this.budget = 0;
       this.shares = 2;
     },
     setupCars: function() {
       this.async(function() {
-        this.set('cars', window.cars);
+        this.set('cars', window.cars.sort(function(a,b) { a.price < b.price }));
         this.forward();
       });
     },

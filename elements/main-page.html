@@ -135,7 +135,7 @@
     </div>
     <div id="cars" class="container self-center">
       <div class="centered self-center">
-        <template id="carList" is="dom-repeat" items="[[cars]]" filter="inRange">
+        <template id="carList" is="dom-repeat" items="[[cars]]" filter="inRange" sort="sortCars">
           <car-tile car="[[item]]" email="{{email}}" budget="[[budget]]" shares="{{shares}}" on-show-quote="showQuote"></car-tile>
         </template>
         <div class="car-shim">&nbsp;</div>
@@ -146,7 +146,7 @@
         <div>
           <div class="number-display">£<span>{{budget}}</span></div>
         </div>
-        <paper-slider id="budgetSlider" class="red" value="{{budget}}" min="250" max="1400" step="50" editable></paper-slider>
+        <paper-slider id="budgetSlider" class="red" value="{{budget}}" min="100" max="1400" step="50" editable></paper-slider>
 
       </div>
       <div class="flex self-centered centered">
@@ -197,8 +197,25 @@
       window.main = this;
     },
 
+    sortCars: function(a, b) {
+      return b.price < a.price ? -1 : 1;
+    },
+
     inRange: function(item) {
-      return((item.price < (this.budget *1.1)) && (item.price > (this.budget * 0.9)));
+      var price = item.price;
+      var budget = this.budget;
+      if(budget < 300) {
+        budget = 300;
+      }
+
+      var variance = 0.1 + (0.1 * ((budget - 300) / 1100));
+      
+      var upper = (budget * (1 + variance));
+      var lower = (budget * (1 - variance));
+      if(budget == 300) {
+        lower = 0;
+      }
+      return((price < upper) && (price > lower));
     },
 
     visibleClass: function(item,budget) {
