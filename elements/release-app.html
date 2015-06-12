@@ -132,6 +132,7 @@
       this.page = 3;
     },
     trackQuote: function() {
+      analytics.identify(window.userId, {email: this.email, first_name: this.first_name, last_name: this.last_name, postcode: this.postcode});
       analytics.track('quote', {make: this.car.make, model: this.car.model, meta: this.car.meta, price: this.price, discounted_price: this.discounted_price, shares: this.shares});
     },
     thanksQuote: function() {
