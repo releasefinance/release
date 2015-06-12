@@ -192,6 +192,12 @@
         value: 0,
         observer: 'sharesUpdated'
       },
+      car_types: {
+        type: Object
+      },
+      chosen_types: {
+        type: Object
+      },
       cars: Object
     },
 
@@ -234,7 +240,15 @@
       if(budget == 300) {
         lower = 0;
       }
-      return((price < upper) && (price > lower));
+      console.log('should it be shown', item.car_types, this.chosen_types);
+      var rightType = this.containsAny(item.car_types, window.chosen_types);
+      return((price < upper) && (price > lower) && rightType);
+    },
+
+    containsAny: function(source,target)
+    {
+        var result = source.filter(function(item){ return target.indexOf(item) > -1});   
+        return (result.length > 0);  
     },
 
     visibleClass: function(item,budget) {

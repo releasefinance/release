@@ -1,0 +1,137 @@
+<link rel="import" href="./release-animated-page.html">
+<link rel="import" href="../bower_components/paper-slider/paper-slider.html">
+<link rel="import" href="../bower_components/paper-spinner/paper-spinner.html">
+
+<link rel="import" href="../bower_components/paper-fab/paper-fab.html">
+<link rel="import" href="../bower_components/paper-checkbox/paper-checkbox.html">
+
+<dom-module id="car-type-page">
+  
+  <style shim-shadowdom>
+    :root {
+      margin-top: 24px;
+    }
+
+    .container {
+      text-align: center;
+    }
+    
+    .container paper-slider /deep/ #sliderKnobInner.paper-slider {
+      background-color: #FFB943;
+    }
+
+    .container paper-slider.paper-slider-0:not([disabled]) /deep/ #sliderBar.paper-slider #activeProgress.paper-progress {
+      background-color: #FFB943;
+    } 
+
+    paper-fab.yellow:not([disabled]) {
+      background: #FFB943;
+    }
+
+    paper-fab.yellow[disabled] {
+      background: #ddd;
+    }
+
+    #valueSlider {
+      width: 100%;
+    }
+
+    .instructions {
+      max-width: 40em;
+      text-align: left;
+      margin-bottom: 4em;
+    }
+
+    .checkboxes {
+      text-align: left ;
+    }
+
+    .checkboxes .checkbox-row {
+      margin-bottom: 1em;
+    }
+
+  </style>
+  <template>
+    <div class="flex layout horizontal self-center">
+      <div class="self-center centered">
+        <div class="container">
+          <div class="instructions">
+            <h3>What kind of car would you like?</h3>
+          </div>
+          
+          <div class="checkboxes">
+            <div class="checkbox-row">
+              <paper-checkbox checked="{{types.family}}">Family</paper-checkbox>
+            </div>
+            <div class="checkbox-row">
+              <paper-checkbox checked="{{types.saloon}}">Saloon</paper-checkbox>
+            </div>
+            <div class="checkbox-row">
+              <paper-checkbox checked="{{types.suv}}">SUV / 4x4</paper-checkbox>
+            </div>
+            <div class="checkbox-row">
+              <paper-checkbox checked="{{types.exec}}">Executive</paper-checkbox>
+            </div>
+            <div class="checkbox-row">
+              <paper-checkbox checked="{{types.sports}}">Sports</paper-checkbox>
+            </div>
+          </div>
+          <paper-fab class="yellow" icon="arrow-forward" on-click="forward"></paper-fab>
+        </div>
+      </div>
+    </div>
+  </template>
+</dom-module>
+<script>
+  Polymer({
+    is: "car-type-page",
+    properties: {
+      types: {
+        type: Array,
+        notify: true
+      },
+      chosen_types: {
+        type: Array,
+        value: []
+      }
+    },
+    ready: function() {
+    },
+    forward: function() {
+      this.setChosenCarTypes();
+      this.fire('forward');
+    },
+    displayPrice: function(budget) {
+      if(budget) {
+        return('£' + (parseInt(budget)));
+      } else {
+        return('£0');
+      }
+    },
+    setChosenCarTypes: function() {
+      // Stupid. I am tired
+      var chosen = [];
+      if(this.types.suv) {
+        chosen.push('suv');
+      }
+      if(this.types.sports) {
+        chosen.push('sports');
+      }
+      if(this.types.exec) {
+        chosen.push('exec');
+      }
+      if(this.types.saloon) {
+        chosen.push('saloon');
+      }
+      if(this.types.family) {
+        chosen.push('family');
+      }
+      console.log("CHOSEN THIS", chosen);
+      // OMG
+      window.chosen_types = chosen;
+      this.set('chosen_types', chosen);
+    }
+
+  });
+
+</script>

@@ -15,6 +15,7 @@
 <link rel="import" href="./shares-page.html">
 <link rel="import" href="./quote-page.html">
 <link rel="import" href="./main-page.html">
+<link rel="import" href="./car-type-page.html">
 
 <dom-module id="release-app" >
   <style shim-shadowdom>
@@ -40,6 +41,8 @@
 
       <shares-page shares="{{shares}}" on-forward="forward" class="center-justified flex layout vertical"></shares-page>
 
+      <car-type-page types="{{car_types}}" chosen_types="{{chosen_types}}" on-forward="forward" class="center-justified flex layout vertical"></car-type-page>
+
       <div class="flex layout horizontal">
         <div class="flex self-center centered">
           <h2>Searching for cars</h2>
@@ -47,7 +50,7 @@
         </div>
       </div>
 
-      <main-page shares="{{shares}}" budget="{{budget}}" on-forward="forward" cars="{{cars}}" car="{{car}}" class="center-justified flex layout vertical" on-show-quote="showQuote"></main-page>
+      <main-page shares="{{shares}}" budget="{{budget}}" on-forward="forward" cars="{{cars}}" car="{{car}}" class="center-justified flex layout vertical" on-show-quote="showQuote" car_types="[[car_ types]]" chosen_types="[[chosen_types]]"></main-page>
 
       <quote-page first_name="{{first_name}}" last_name="{{last_name}}" email="{{email}}" car="{{car}}" class="layout horizontal flex" on-cancel-quote="cancelQuote" on-thanks-quote="thanksQuote"></quote-page>
 
@@ -81,11 +84,34 @@
       car_type: String,
       car: Object,
 
+      pages: {
+        type: Array,
+        value: ["budget", "shares", "car_type", "searching", "listing","quote", "thanks"]
+      },
+
+      chosen_types: {
+        type: Array,
+        value: [],
+        observer: 'chosen_types_changed'
+      },
+
+      car_types: {
+        type: Object,
+        value: {
+          suv: true,
+          family: true,
+          exec: true,
+          sports: true,
+          saloon: true
+        }
+      },
+
       cars: {
         type: Array,
         value: [],
         notify: true
       },
+
       keysTarget: {
         type: Object,
         value: function() {
@@ -94,11 +120,16 @@
       }
     },
 
+    chosen_types_changed: function(value) {
+      console.log('chosen types changed', value);
+    },
+
     forward: function() {
-      if(this.page < 3 ) {
+      if(this.page < 4 ) {
         this.page = this.page + 1;
-        analytics.track('Page ' + this.page);
-        if(this.page == 2) {
+        analytics.page(this.pages[this.page]);
+        analytics.page('Page + ' + this.pages[this.page]);
+        if(this.page == 3) {
           this.async(function() {
             this.setupCars();
           },1000);
@@ -114,12 +145,13 @@
     setupCars: function() {
       this.async(function() {
         this.set('cars', window.cars.sort(function(a,b) { a.price < b.price }));
+        for(var i = 0; i < this.cars.length; i++) {
+          this.set('cars.' + i + '.car_types', window.car_types[this.cars[i].model]);
+        }
         this.forward();
       });
     },
     showQuote: function(data) {
-      console.log('showquote', data);
-
       this.set('car', data.detail.car);
       if(this.email == "") {
         analytics.track('quote form', {make: this.car.make, model: this.car.model, meta: this.car.meta, price: this.price, discounted_price: this.discounted_price, shares: this.shares});
