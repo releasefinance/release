@@ -52,9 +52,16 @@
       cursor: pointer;
     }
 
-    @media (max-width: 800px) {
+    @media (max-width: 900px) {
+      car-tile {
+        width: 48%;
+      }
+    }
+
+    @media (max-width: 500px) {
       car-tile {
         width: 100%;
+        height: 500px;
       }
     }
 
@@ -209,7 +216,7 @@
       }
 
       var variance = 0.1 + (0.1 * ((budget - 300) / 1100));
-      
+
       var upper = (budget * (1 + variance));
       var lower = (budget * (1 - variance));
       if(budget == 300) {
