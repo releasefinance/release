@@ -97,7 +97,7 @@
     },
     
     submit: function() {
-      analytics.identify({email: this.email, first_name: this.first_name, last_name: this.last_name, postcode: this.postcode});
+      analytics.identify(window.userId, {email: this.email, first_name: this.first_name, last_name: this.last_name, postcode: this.postcode});
       this.fire('thanks-quote');
     },
     cancelQuote: function() {
