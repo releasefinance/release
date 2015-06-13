@@ -45,26 +45,24 @@
     border: none;
   }
 
+  .main-quote {
+    min-height: 640px;
+  }
+
   </style>
   <template>
-    <div class="flex layout horizontal self-center">
-      <div class="flex self-center centered">
-        <div class="container">
-          <div id="quote" class="layout horizontal flex">
-            <div class="quote-form centered self-center">
-              <div class="close" on-tap="cancelQuote">&times;</div>
-              <h1>Request a quote</h1>
-              <h2><span>{{car.make}}</span> <span>{{car.model}}</span></h2>
-              <paper-input name="email" value="{{email}}" label="Your email"></paper-input>
-              <paper-input name="first_name" value="{{first_name}}" label="First name"></paper-input>
-              <paper-input name="last_name" value="{{last_name}}" label="Last name"></paper-input>
-              <paper-input name="postcode" value="{{postcode}}" label="Post code"></paper-input>
+    <div class="main-quote flex layout horizontal self-center centered">
+      <div class="quote-form flex centered self-center">
+        <div class="close" on-tap="cancelQuote">&times;</div>
+        <h1>Request a quote</h1>
+        <h2><span>{{car.make}}</span> <span>{{car.model}}</span></h2>
+        <paper-input name="email" value="{{email}}" label="Your email"></paper-input>
+        <paper-input name="first_name" value="{{first_name}}" label="First name"></paper-input>
+        <paper-input name="last_name" value="{{last_name}}" label="Last name"></paper-input>
+        <paper-input name="postcode" value="{{postcode}}" label="Post code"></paper-input>
 
-              <div class="cta">
-                <a class="cta-button" on-click="submit">Submit request</a>
-              </div>
-            </div>
-          </div>
+        <div class="cta">
+          <a class="cta-button" on-click="submit">Submit request</a>
         </div>
       </div>
     </div>

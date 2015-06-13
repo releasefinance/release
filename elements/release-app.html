@@ -52,7 +52,7 @@
 
       <main-page shares="{{shares}}" budget="{{budget}}" on-forward="forward" cars="{{cars}}" car="{{car}}" class="center-justified flex layout vertical" on-show-quote="showQuote" car_types="[[car_ types]]" chosen_types="[[chosen_types]]"></main-page>
 
-      <quote-page first_name="{{first_name}}" last_name="{{last_name}}" email="{{email}}" car="{{car}}" class="layout horizontal flex" on-cancel-quote="cancelQuote" on-thanks-quote="thanksQuote"></quote-page>
+      <quote-page first_name="{{first_name}}" last_name="{{last_name}}" email="{{email}}" car="{{car}}" class="layout vertical flex" on-cancel-quote="cancelQuote" on-thanks-quote="thanksQuote"></quote-page>
 
       <div id="thanks" class="layout horizontal flex">
         <div class="flex thanks-message centered self-center">
@@ -70,7 +70,7 @@
     properties: {
       page: {
         type: Number,
-        value: 0
+        value: 5
       },
       first_name: String,
       last_name: String,
