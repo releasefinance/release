@@ -8,6 +8,10 @@
     margin: auto;
   }
 
+  :root {
+    min-height: 700px;
+  };
+
   .cta {
       margin-top: 2em;
       margin-bottom: 3em;
@@ -51,10 +55,10 @@
               <div class="close" on-tap="cancelQuote">&times;</div>
               <h1>Request a quote</h1>
               <h2><span>{{car.make}}</span> <span>{{car.model}}</span></h2>
-              <paper-input value="{{email}}" label="Your email"></paper-input>
-              <paper-input value="{{first_name}}" label="First name"></paper-input>
-              <paper-input value="{{last_name}}" label="Last name"></paper-input>
-              <paper-input value="{{postcode}}" label="Post code"></paper-input>
+              <paper-input name="email" value="{{email}}" label="Your email"></paper-input>
+              <paper-input name="first_name" value="{{first_name}}" label="First name"></paper-input>
+              <paper-input name="last_name" value="{{last_name}}" label="Last name"></paper-input>
+              <paper-input name="postcode" value="{{postcode}}" label="Post code"></paper-input>
 
               <div class="cta">
                 <a class="cta-button" on-click="submit">Submit request</a>
