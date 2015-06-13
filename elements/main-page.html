@@ -240,7 +240,6 @@
       if(budget == 300) {
         lower = 0;
       }
-      console.log('should it be shown', item.car_types, this.chosen_types);
       var rightType = this.containsAny(item.car_types, window.chosen_types);
       return((price < upper) && (price > lower) && rightType);
     },
