@@ -50,7 +50,7 @@
         </div>
       </div>
 
-      <main-page shares="{{shares}}" budget="{{budget}}" on-forward="forward" cars="{{cars}}" car="{{car}}" class="center-justified flex layout vertical" on-show-quote="showQuote" car_types="[[car_ types]]" chosen_types="[[chosen_types]]"></main-page>
+      <main-page shares="{{shares}}" budget="{{budget}}" on-forward="forward" cars="{{cars}}" car="{{car}}" class="center-justified flex layout vertical" on-show-quote="showQuote" car_types="[[car_ types]]" chosen_types="[[chosen_types]]" on-another="anotherSearch"></main-page>
 
       <quote-page first_name="{{first_name}}" last_name="{{last_name}}" email="{{email}}" car="{{car}}" class="layout vertical flex" on-cancel-quote="cancelQuote" on-thanks-quote="thanksQuote"></quote-page>
 
@@ -70,7 +70,7 @@
     properties: {
       page: {
         type: Number,
-        value: 5
+        value: 0
       },
       first_name: String,
       last_name: String,
@@ -173,6 +173,9 @@
       this.async(function() {
         this.page = 4;
       }, 3000);
+    },
+    anotherSearch: function() {
+      this.set('page',0);
     }
 
   });

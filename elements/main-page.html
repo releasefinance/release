@@ -147,6 +147,15 @@
     .your-available {
       margin-left: 0.5em;
     }
+
+    .another-search {
+      margin-top: 2em;
+      margin-bottom: 2em;
+    }
+
+    .another-search a {
+      text-decoration: underline;
+    }
   </style>
   <template>
     <div class="results-intro">
@@ -157,6 +166,9 @@
         <template id="carList" is="dom-repeat" items="[[cars]]" filter="inRange" sort="sortCars">
           <car-tile car="[[item]]" email="{{email}}" budget="[[budget]]" shares="{{shares}}" on-show-quote="showQuote"></car-tile>
         </template>
+        <div class="another-search">
+          <a class="" on-click="anotherSearch">Try another search</a>
+        </div>
         <div class="car-shim">&nbsp;</div>
       </div>
     </div>
@@ -257,6 +269,10 @@
       } else {
         return "hidden";
       }
+    },
+
+    anotherSearch: function() {
+      this.fire('another');
     },
 
     showQuote: function(options) {
