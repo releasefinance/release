@@ -132,7 +132,9 @@
       }
       console.log("CHOSEN THIS", chosen);
       // OMG
+
       window.chosen_types = chosen;
+      analytics.track('chose car types', this.types);
       this.set('chosen_types', chosen);
     }
 
